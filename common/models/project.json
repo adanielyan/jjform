@@ -1,0 +1,31 @@
+{
+  "name": "Project",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Name": {
+      "type": "string",
+      "index": true
+    },
+    "Organization": {
+      "type": "string",
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "regionalData": {
+      "type": "hasMany",
+      "model": "RegionalData",
+      "foreignKey": "regionalDataId"
+    },
+    "location": {
+      "type": "hasOne",
+      "model": "Location",
+      "foreignKey": "locationId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

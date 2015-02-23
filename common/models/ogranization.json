@@ -1,0 +1,33 @@
+{
+  "name": "Ogranization",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Description": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string",
+      "id": false,
+      "required": true,
+      "index": true
+    },
+    "Phone": {
+      "type": "string"
+    },
+    "URL": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "location": {
+      "type": "hasOne",
+      "model": "Location",
+      "foreignKey": "locationId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

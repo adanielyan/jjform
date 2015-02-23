@@ -1,0 +1,22 @@
+{
+  "name": "SystemUser",
+  "base": "User",
+  "strict": false,
+  "idInjection": true,
+  "properties": {
+    "username": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

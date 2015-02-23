@@ -1,0 +1,33 @@
+{
+  "name": "RegionalData",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Region": {
+      "type": "string",
+      "index": true
+    },
+    "ContactName": {
+      "type": "string"
+    },
+    "ContactEmail": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": "projectId"
+    },
+    "locations": {
+      "type": "hasMany",
+      "model": "Location",
+      "foreignKey": "locationId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,28 @@
+{
+  "MongoDB": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "jjmap",
+    "name": "MongoDB",
+    "connector": "mongodb"
+  },
+  "EmailDS": {
+    "name": "EmailDS",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": false,
+        "port": 587,
+        "tls": {
+          "rejectUnauthorized": true
+        },
+        "auth": {
+          "user": "adanielyan.fhi360@gmail.com",
+          "pass": "SamD0m_op"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "Location",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Coordinates": {
+      "type": "geopoint",
+      "index": true
+    },
+    "Country": {
+      "type": "string",
+      "index": true
+    },
+    "Region": {
+      "type": "string",
+      "index": true
+    },
+    "City": {
+      "type": "string"
+    },
+    "Address": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Zip": {
+      "type": "string"
+    },
+    "isOffice": {
+      "type": "boolean",
+      "index": true
+    },
+    "SubRegion": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "regionalData": {
+      "type": "belongsTo",
+      "model": "RegionalData",
+      "foreignKey": "regionalDataId"
+    },
+    "ogranization": {
+      "type": "belongsTo",
+      "model": "Ogranization",
+      "foreignKey": "organizationId"
+    },
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": "projectId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "Email": {
+    "dataSource": "EmailDS"
+  },
+  "AccessToken": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "MongoDB",
+    "public": false
+  },
+  "Project": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "SystemUser": {
+    "dataSource": "MongoDB",
+    "public": true,
+    "options": {
+      "realmRequired": true,
+      "realmDelimiter": ":"
+    }
+  },
+  "RegionalData": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Location": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Ogranization": {
+    "dataSource": "MongoDB",
+    "public": true
+  }
+}
