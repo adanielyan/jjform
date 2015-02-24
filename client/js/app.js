@@ -13,7 +13,7 @@ angular
       .state('regionalData', {
         url: '/regions/:projectId',
         templateUrl: 'views/regionalData.html',
-        controller: 'ProjectController'
+        controller: 'RegionalDataController'
       });;
 
     $urlRouterProvider.otherwise('project');

@@ -2,8 +2,6 @@ angular
     .module('app')
     .controller('ProjectController', ['$scope', '$state', 'Project', function($scope, $state, Project) {
       $scope.projects = [];
-      $scope.regionalData = [];
-      $scope.project = null;
 
       function getProjects() {
         Project
@@ -35,22 +33,4 @@ angular
               getProjects();
             });
       };
-
-      $scope.getProjectById = function(id) {
-        Project
-            .findById(id)
-            .$promise
-            .then(function(result) {
-              $scope.project = result;
-            });
-      }
-
-      $scope.getRegionalDataByProjectId = function(id) {
-        Project
-            .getRegionalDataByProjectId(id)
-            .$promise
-            .then(function(results) {
-              $scope.regionalData = results;
-            });
-      }
     }]);
