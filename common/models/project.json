@@ -4,12 +4,13 @@
   "strict": false,
   "idInjection": false,
   "properties": {
-    "Name": {
+    "Organization": {
       "type": "string",
       "index": true
     },
-    "Organization": {
+    "Name": {
       "type": "string",
+      "required": true,
       "index": true
     }
   },
