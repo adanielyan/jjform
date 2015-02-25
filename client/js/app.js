@@ -13,8 +13,8 @@ angular
       .state('regionalData', {
         url: '/regions/:projectId',
         templateUrl: 'views/regionalData.html',
-        controller: 'RegionalDataController'
-      });;
+        controller: 'regionalDataController'
+      });
 
     $urlRouterProvider.otherwise('project');
   }]);
