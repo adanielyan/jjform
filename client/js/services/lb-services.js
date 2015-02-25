@@ -17,6 +17,50 @@ var module = angular.module("lbServices", ['ngResource']);
 
 /**
  * @ngdoc object
+ * @name lbServices.Email
+ * @header lbServices.Email
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Email` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Email",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Emails/:id",
+      { 'id': '@id' },
+      {
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Email#modelName
+    * @propertyOf lbServices.Email
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Email`.
+    */
+    R.modelName = "Email";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
  * @name lbServices.Project
  * @header lbServices.Project
  * @object
@@ -56,6 +100,30 @@ module.factory(
         "prototype$__updateById__regionalData": {
           url: urlBase + "/Projects/:id/regionalData/:fk",
           method: "PUT"
+        },
+
+        // INTERNAL. Use Project.location() instead.
+        "prototype$__get__location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Project.location.create() instead.
+        "prototype$__create__location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Project.location.update() instead.
+        "prototype$__update__location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Project.location.destroy() instead.
+        "prototype$__destroy__location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "DELETE"
         },
 
         // INTERNAL. Use Project.regionalData() instead.
@@ -429,6 +497,12 @@ module.factory(
           url: urlBase + "/RegionalData/:id/project",
           method: "GET"
         },
+
+        // INTERNAL. Use Location.project() instead.
+        "::get::Location::project": {
+          url: urlBase + "/Locations/:id/project",
+          method: "GET"
+        }
       }
     );
 
@@ -826,6 +900,163 @@ module.factory(
         R.regionalData.updateById = function() {
           var TargetResource = $injector.get("RegionalData");
           var action = TargetResource["::updateById::Project::regionalData"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Project.location
+     * @header lbServices.Project.location
+     * @object
+     * @description
+     *
+     * The object `Project.location` groups methods
+     * manipulating `Location` instances related to `Project`.
+     *
+     * Call {@link lbServices.Project#location Project.location()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Project#location
+         * @methodOf lbServices.Project
+         *
+         * @description
+         *
+         * Fetches hasOne relation location
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::get::Project::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Project.location#create
+         * @methodOf lbServices.Project.location
+         *
+         * @description
+         *
+         * Creates a new instance in location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location.create = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::create::Project::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Project.location#destroy
+         * @methodOf lbServices.Project.location
+         *
+         * @description
+         *
+         * Deletes location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.location.destroy = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::destroy::Project::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Project.location#update
+         * @methodOf lbServices.Project.location
+         *
+         * @description
+         *
+         * Update location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location.update = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::update::Project::location"];
           return action.apply(R, arguments);
         };
 
@@ -2760,6 +2991,18 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Location.project() instead.
+        "prototype$__get__project": {
+          url: urlBase + "/Locations/:id/project",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Location.ogranization() instead.
+        "prototype$__get__ogranization": {
+          url: urlBase + "/Locations/:id/ogranization",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Location#create
@@ -3101,6 +3344,30 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Project.location() instead.
+        "::get::Project::location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Project.location.create() instead.
+        "::create::Project::location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Project.location.update() instead.
+        "::update::Project::location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Project.location.destroy() instead.
+        "::destroy::Project::location": {
+          url: urlBase + "/Projects/:id/location",
+          method: "DELETE"
+        },
+
         // INTERNAL. Use RegionalData.locations.findById() instead.
         "::findById::RegionalData::locations": {
           url: urlBase + "/RegionalData/:id/locations/:fk",
@@ -3142,6 +3409,30 @@ module.factory(
         "::count::RegionalData::locations": {
           url: urlBase + "/RegionalData/:id/locations/count",
           method: "GET"
+        },
+
+        // INTERNAL. Use Ogranization.location() instead.
+        "::get::Ogranization::location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ogranization.location.create() instead.
+        "::create::Ogranization::location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Ogranization.location.update() instead.
+        "::update::Ogranization::location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Ogranization.location.destroy() instead.
+        "::destroy::Ogranization::location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "DELETE"
         },
       }
     );
@@ -3313,6 +3604,770 @@ module.factory(
         R.regionalData = function() {
           var TargetResource = $injector.get("RegionalData");
           var action = TargetResource["::get::Location::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location#project
+         * @methodOf lbServices.Location
+         *
+         * @description
+         *
+         * Fetches belongsTo relation project
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.project = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::get::Location::project"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location#ogranization
+         * @methodOf lbServices.Location
+         *
+         * @description
+         *
+         * Fetches belongsTo relation ogranization
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        R.ogranization = function() {
+          var TargetResource = $injector.get("Ogranization");
+          var action = TargetResource["::get::Location::ogranization"];
+          return action.apply(R, arguments);
+        };
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.Ogranization
+ * @header lbServices.Ogranization
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Ogranization` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Ogranization",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/Ogranizations/:id",
+      { 'id': '@id' },
+      {
+
+        // INTERNAL. Use Ogranization.location() instead.
+        "prototype$__get__location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Ogranization.location.create() instead.
+        "prototype$__create__location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Ogranization.location.update() instead.
+        "prototype$__update__location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Ogranization.location.destroy() instead.
+        "prototype$__destroy__location": {
+          url: urlBase + "/Ogranizations/:id/location",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#create
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/Ogranizations",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#upsert
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/Ogranizations",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#exists
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` - 
+         */
+        "exists": {
+          url: urlBase + "/Ogranizations/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#findById
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/Ogranizations/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#find
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, orderBy, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/Ogranizations",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#findOne
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, orderBy, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/Ogranizations/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#updateAll
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "updateAll": {
+          url: urlBase + "/Ogranizations/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#deleteById
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "deleteById": {
+          url: urlBase + "/Ogranizations/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#count
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "count": {
+          url: urlBase + "/Ogranizations/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#prototype$updateAttributes
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/Ogranizations/:id",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Location.ogranization() instead.
+        "::get::Location::ogranization": {
+          url: urlBase + "/Locations/:id/ogranization",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#updateOrCreate
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Ogranization` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#update
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#destroyById
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#removeById
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R["removeById"] = R["deleteById"];
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Ogranization#modelName
+    * @propertyOf lbServices.Ogranization
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Ogranization`.
+    */
+    R.modelName = "Ogranization";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.Ogranization.location
+     * @header lbServices.Ogranization.location
+     * @object
+     * @description
+     *
+     * The object `Ogranization.location` groups methods
+     * manipulating `Location` instances related to `Ogranization`.
+     *
+     * Call {@link lbServices.Ogranization#location Ogranization.location()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization#location
+         * @methodOf lbServices.Ogranization
+         *
+         * @description
+         *
+         * Fetches hasOne relation location
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::get::Ogranization::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization.location#create
+         * @methodOf lbServices.Ogranization.location
+         *
+         * @description
+         *
+         * Creates a new instance in location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location.create = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::create::Ogranization::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization.location#destroy
+         * @methodOf lbServices.Ogranization.location
+         *
+         * @description
+         *
+         * Deletes location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.location.destroy = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::destroy::Ogranization::location"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Ogranization.location#update
+         * @methodOf lbServices.Ogranization.location
+         *
+         * @description
+         *
+         * Update location of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Location` object.)
+         * </em>
+         */
+        R.location.update = function() {
+          var TargetResource = $injector.get("Location");
+          var action = TargetResource["::update::Ogranization::location"];
           return action.apply(R, arguments);
         };
 
