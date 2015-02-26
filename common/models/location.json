@@ -41,17 +41,17 @@
     "regionalData": {
       "type": "belongsTo",
       "model": "RegionalData",
-      "foreignKey": "regionalDataId"
+      "foreignKey": "locationId"
     },
     "ogranization": {
       "type": "belongsTo",
       "model": "Ogranization",
-      "foreignKey": "organizationId"
+      "foreignKey": "locationId"
     },
     "project": {
       "type": "belongsTo",
       "model": "Project",
-      "foreignKey": "projectId"
+      "foreignKey": "locationId"
     }
   },
   "acls": [],

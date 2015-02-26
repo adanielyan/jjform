@@ -20,12 +20,12 @@
     "project": {
       "type": "belongsTo",
       "model": "Project",
-      "foreignKey": "projectId"
+      "foreignKey": "regionalDataId"
     },
     "locations": {
       "type": "hasMany",
       "model": "Location",
-      "foreignKey": "locationId"
+      "foreignKey": "regionalDataId"
     }
   },
   "acls": [],

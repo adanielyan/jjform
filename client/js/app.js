@@ -6,12 +6,12 @@ angular
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('project', {
-        url: '',
-        templateUrl: 'views/project.html',
+        url: '/project/:projectId',
+        templateUrl: 'views/projects.html',
         controller: 'ProjectController'
       })
-      .state('regionalData', {
-        url: '/regions/:projectId',
+      .state('project.regionalData', {
+        //url: '/regions/:projectId',
         templateUrl: 'views/regionalData.html',
         controller: 'regionalDataController'
       });

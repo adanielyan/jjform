@@ -19,7 +19,7 @@
     "regionalData": {
       "type": "hasMany",
       "model": "RegionalData",
-      "foreignKey": "regionalDataId"
+      "foreignKey": "projectId"
     },
     "location": {
       "type": "hasOne",
