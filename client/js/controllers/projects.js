@@ -1,9 +1,6 @@
 angular
     .module('app')
     .controller('ProjectController', ['$scope', '$state', 'Project', function($scope, $state, Project) {
-        $scope.projects = $scope.projects || [];
-        $scope.regionalData = $scope.regionalData || [];
-        $scope.project = $scope.project || {};
 
         $scope.getProjects = function() {
             Project
@@ -37,7 +34,7 @@ angular
 
         $scope.updateProject = function() {
             Project
-                .updateById($scope.project)
+                .upsert($scope.project)
                 .$promise
                 .then(function(project) {
                     $scope.project = project;
@@ -62,15 +59,19 @@ angular
                 });
         };
 
-        if($state.params.projectId) {
-            $scope.getProjectById({id: $state.params.projectId});
-            //$state.transitionTo('project.projectFields');
-            $scope.getProjectRegionalData({id: $state.params.projectId});
+        if ($state.params.projectId !== undefined) {
+            console.log("projectId: " + $state.params.projectId);
+            $scope.project = $scope.project || $scope.getProjectById({id: $state.params.projectId});
+            $scope.regionalData = $scope.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
         }
         else {
-            $scope.getProjects();
+            $scope.projects = $scope.projects || $scope.getProjects();
         }
-        console.log("State: ");
-        console.log($state.is('project.details'));
+
+        console.log("Project: " + $scope.project);
+
+        if ($scope.project !== undefined) {
+            console.log("Project Name: " + $scope.project.Name);
+        }
 
     }]);

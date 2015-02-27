@@ -4,11 +4,6 @@
     <div ui-view></div>
     <div ui-view="regionalData"></div>
 
-    <button class="btn btn-default" ng-disabled="projectForm.$invalid">Add</button>
+    <button class="btn btn-default" ng-disabled="projectForm.$invalid">Save</button>
+    <button class="btn btn-default" ng-click="removeProject(project)">Delete Project</button>
 </form>
-<hr>
-<div class="list-group">
-    <a class="list-group-item" ng-repeat="project in projects">{{project.Name}}&nbsp;
-        <i class="glyphicon glyphicon-remove pull-right" ng-click="removeProject(project)"></i>
-    </a>
-</div>

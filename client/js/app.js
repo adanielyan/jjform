@@ -11,11 +11,6 @@ angular
             templateUrl: 'views/project.html',
             controller: 'ProjectController'
           })
-          .state('projects', {
-            url: '/projects',
-            templateUrl: 'views/project-fields.html',
-            controller: 'ProjectController'
-          })
           .state('project.details', {
             url: '/:projectId',
             views: {
