@@ -2,12 +2,13 @@ angular
     .module('app')
     .controller('ProjectController', ['$scope', '$state', 'Project', function($scope, $state, Project) {
 
+        $scope.data = $scope.data || {};
         $scope.getProjects = function() {
             Project
                 .find()
                 .$promise
                 .then(function(results) {
-                    $scope.projects = results;
+                    $scope.data.projects = results;
                 });
         };
 
@@ -16,7 +17,7 @@ angular
                 .findById(item)
                 .$promise
                 .then(function(result) {
-                    $scope.project = result;
+                    $scope.data.project = result;
                 });
         };
 
@@ -25,8 +26,8 @@ angular
                 .create($scope.newProject)
                 .$promise
                 .then(function(project) {
-                    $scope.newProject = '';
-                    $scope.projectForm.Name.$setPristine();
+                    $scope.data.newProject = '';
+                    $scope.data.projectForm.Name.$setPristine();
                     $('.focus').focus();
                     getProjects();
                 });
@@ -34,10 +35,10 @@ angular
 
         $scope.updateProject = function() {
             Project
-                .upsert($scope.project)
+                .upsert($scope.data.project)
                 .$promise
                 .then(function(project) {
-                    $scope.project = project;
+                    $scope.data.project = project;
                 });
         };
 
@@ -55,23 +56,23 @@ angular
                 .regionalData(item)
                 .$promise
                 .then(function(results) {
-                    $scope.regionalData = results;
+                    $scope.data.regionalData = results;
                 });
         };
 
         if ($state.params.projectId !== undefined) {
             console.log("projectId: " + $state.params.projectId);
-            $scope.project = $scope.project || $scope.getProjectById({id: $state.params.projectId});
-            $scope.regionalData = $scope.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
+            $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId});
+            $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
         }
         else {
-            $scope.projects = $scope.projects || $scope.getProjects();
+            $scope.data.projects = $scope.data.projects || $scope.getProjects();
         }
 
-        console.log("Project: " + $scope.project);
+        console.log("Project: " + $scope.data.project);
 
-        if ($scope.project !== undefined) {
-            console.log("Project Name: " + $scope.project.Name);
+        if ($scope.data.project !== undefined) {
+            console.log("Project Name: " + $scope.data.project.Name);
         }
 
     }]);

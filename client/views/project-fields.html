@@ -1,11 +1,11 @@
 <div class="form-group"
-     ng-class="{'has-error': projectForm.Name.$invalid
-        && projectForm.Name.$dirty}">
+     ng-class="{'has-error': data.projectForm.Name.$invalid
+        && data.projectForm.Name.$dirty}">
     <input type="text" class="form-control focus" name="Name"
            placeholder="Project Name" autocomplete="off" required
-           ng-model="project.Name">
+           ng-model="data.project.Name">
     <span class="has-error control-label" ng-show="
-        projectForm.Name.$invalid && projectForm.Name.$dirty">
+        data.projectForm.Name.$invalid && data.projectForm.Name.$dirty">
       Project Name is required.
     </span>
 </div>
