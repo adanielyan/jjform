@@ -25,8 +25,8 @@ angular
             }
 
           })
-          .state('project.regionalData', {
-            url: '/regions/:projectId',
+          .state('projectRegionalData', {
+            url: 'project/:projectId/regions',
             templateUrl: 'views/regional-data.html',
             controller: 'regionalDataController'
           });
