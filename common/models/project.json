@@ -12,6 +12,9 @@
       "type": "string",
       "required": true,
       "index": true
+    },
+    "ownerId": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -25,6 +28,11 @@
       "type": "hasOne",
       "model": "Location",
       "foreignKey": "locationId"
+    },
+    "systemUser": {
+      "type": "belongsTo",
+      "model": "SystemUser",
+      "foreignKey": "ownerId"
     }
   },
   "acls": [],

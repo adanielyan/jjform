@@ -1,18 +1,18 @@
 angular
     .module('app')
     .controller('ProjectController', ['$scope', '$state', 'Project', function($scope, $state, Project) {
-        $scope.projects = [];
-        $scope.project = {};
+        $scope.projects = $scope.projects || [];
+        $scope.regionalData = $scope.regionalData || [];
+        $scope.project = $scope.project || {};
 
-        function getProjects() {
+        $scope.getProjects = function() {
             Project
                 .find()
                 .$promise
                 .then(function(results) {
                     $scope.projects = results;
                 });
-        }
-        getProjects();
+        };
 
         $scope.getProjectById = function(item) {
             Project
@@ -52,4 +52,25 @@ angular
                     getProjects();
                 });
         };
+
+        $scope.getProjectRegionalData = function(item) {
+            Project
+                .regionalData(item)
+                .$promise
+                .then(function(results) {
+                    $scope.regionalData = results;
+                });
+        };
+
+        if($state.params.projectId) {
+            $scope.getProjectById({id: $state.params.projectId});
+            //$state.transitionTo('project.projectFields');
+            $scope.getProjectRegionalData({id: $state.params.projectId});
+        }
+        else {
+            $scope.getProjects();
+        }
+        console.log("State: ");
+        console.log($state.is('project.details'));
+
     }]);

@@ -1,22 +1,14 @@
-<h1>Project list</h1>
+<h1>{{project.Name}}</h1>
 <hr>
-<form name="projectForm" novalidate ng-submit="addProject()">
-  <div class="form-group"
-      ng-class="{'has-error': projectForm.Name.$invalid
-        && projectForm.Name.$dirty}">
-    <input type="text" class="form-control focus" name="Name"
-        placeholder="Project Name" autocomplete="off" required
-        ng-model="newProject.Name">
-    <span class="has-error control-label" ng-show="
-        projectForm.Name.$invalid && projectForm.Name.$dirty">
-      Project Name is required.
-    </span>
-  </div>
-  <button class="btn btn-default" ng-disabled="projectForm.$invalid">Add</button>
+<form name="projectForm" novalidate ng-submit="updateProject()">
+    <div ui-view></div>
+    <div ui-view="regionalData"></div>
+
+    <button class="btn btn-default" ng-disabled="projectForm.$invalid">Add</button>
 </form>
 <hr>
 <div class="list-group">
-  <a class="list-group-item" ng-repeat="project in projects">{{project.Name}}&nbsp;
-    <i class="glyphicon glyphicon-remove pull-right"
-        ng-click="removeProject(project)"></i></a>
+    <a class="list-group-item" ng-repeat="project in projects">{{project.Name}}&nbsp;
+        <i class="glyphicon glyphicon-remove pull-right" ng-click="removeProject(project)"></i>
+    </a>
 </div>
