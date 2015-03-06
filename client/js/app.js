@@ -11,24 +11,31 @@ angular
             templateUrl: 'views/project.html',
             controller: 'ProjectController'
           })
+          .state('project.new', {
+            url: '/new',
+            views: {
+              '': {
+                templateUrl: 'views/project-fields.html'
+              },
+              'regionalData': {
+                templateUrl: 'views/regional-data.html'
+              }
+            }
+          })
           .state('project.details', {
             url: '/:projectId',
             views: {
               '': {
-                templateUrl: 'views/project-fields.html',
-                controller: 'ProjectController'
+                templateUrl: 'views/project-fields.html'
               },
               'regionalData': {
-                templateUrl: 'views/regional-data.html',
-                controller: 'ProjectController'
+                templateUrl: 'views/regional-data.html'
               }
             }
-
           })
-          .state('projectRegionalData', {
-            url: 'project/:projectId/regions',
-            templateUrl: 'views/regional-data.html',
-            controller: 'regionalDataController'
+          .state('project.regionalData', {
+            url: '/regions/:projectId',
+            templateUrl: 'views/regional-data.html'
           });
 
       $urlRouterProvider.otherwise('projects');

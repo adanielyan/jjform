@@ -1,8 +1,19 @@
 angular
     .module('app')
-    .controller('ProjectController', ['$scope', '$state', 'Project', function($scope, $state, Project) {
+    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData',
+        function($rootScope, $scope, $state, Project, RegionalData) {
 
         $scope.data = $scope.data || {};
+
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
+                delete $scope.data.project;
+                delete $scope.data.regionalData;
+                console.log($state);
+                $scope.initProject();
+            }
+        });
+
         $scope.getProjects = function() {
             Project
                 .find()
@@ -21,34 +32,36 @@ angular
                 });
         };
 
-        $scope.addProject = function() {
-            Project
-                .create($scope.newProject)
-                .$promise
-                .then(function(project) {
-                    $scope.data.newProject = '';
-                    $scope.data.projectForm.Name.$setPristine();
-                    $('.focus').focus();
-                    getProjects();
-                });
-        };
-
-        $scope.updateProject = function() {
+        $scope.saveProject = function() {
             Project
                 .upsert($scope.data.project)
                 .$promise
                 .then(function(project) {
                     $scope.data.project = project;
+                    var iteration = 0;
+                    for(var i=0; i < $scope.data.regionalData.length; i++) {
+                        $scope.data.regionalData[i]['projectId'] = project.id;
+                        RegionalData
+                            .upsert($scope.data.regionalData[i])
+                            .$promise
+                            .then(function(projectData) {
+                                iteration++;
+                                if(iteration == $scope.data.regionalData.length) {
+                                    $state.transitionTo('project.details', {projectId: project.id}, {location: true, notify: true, reload: true});
+                                }
+                            });
+                    }
                 });
         };
 
-        $scope.removeProject = function(item) {
+        $scope.removeProject = function($event, item) {
             Project
                 .deleteById(item)
                 .$promise
                 .then(function() {
-                    getProjects();
+                    $state.go('project.new');
                 });
+            $event.preventDefault();
         };
 
         $scope.getProjectRegionalData = function(item) {
@@ -60,19 +73,26 @@ angular
                 });
         };
 
-        if ($state.params.projectId !== undefined) {
-            console.log("projectId: " + $state.params.projectId);
-            $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId});
-            $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
-        }
-        else {
+        $scope.addProjectRegionalData = function($event) {
+            $scope.data.regionalData.push({});
+            $event.preventDefault();
+        };
+
+        //console.log($state.params);
+
+        $scope.initProject = function() {
+            if ($state.params.projectId !== undefined) {
+                $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId});
+                $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
+            }
+            else {
+                $scope.data.project = $scope.data.project || {};
+                $scope.data.regionalData = $scope.data.regionalData || [];
+            }
+        };
+
+        $scope.initProjects = function() {
             $scope.data.projects = $scope.data.projects || $scope.getProjects();
-        }
-
-        console.log("Project: " + $scope.data.project);
-
-        if ($scope.data.project !== undefined) {
-            console.log("Project Name: " + $scope.data.project.Name);
-        }
+        };
 
     }]);

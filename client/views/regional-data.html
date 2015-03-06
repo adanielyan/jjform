@@ -1,11 +1,11 @@
 <div class="list-group">
     <div class="form-group" ng-repeat="regionalDatum in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
         <input type="text" class="form-control focus" name="Region"
-               placeholder="Region Name" autocomplete="off" required
+               placeholder="Region Name" autocomplete="off"
                ng-model="regionalDatum.Region">
         <span class="has-error control-label" ng-show="Region.$invalid && Region.$dirty">
             Region Name is required.
         </span>
     </div>
-    <button class="btn btn-default" ng-disabled="Region.$invalid">Add Region</button>
+    <button class="btn btn-default" ng-disabled="Region.$invalid" ng-click="addProjectRegionalData($event)">Add Region</button>
 </div>
