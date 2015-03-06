@@ -13,6 +13,9 @@
     },
     "ContactEmail": {
       "type": "string"
+    },
+    "Funding": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -20,7 +23,7 @@
     "project": {
       "type": "belongsTo",
       "model": "Project",
-      "foreignKey": "regionalDataId"
+      "foreignKey": "projectId"
     },
     "locations": {
       "type": "hasMany",

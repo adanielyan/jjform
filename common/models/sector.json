@@ -1,0 +1,21 @@
+{
+  "name": "Sector",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "subSectors": {
+      "type": "hasMany",
+      "model": "SubSector",
+      "foreignKey": "sectorId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

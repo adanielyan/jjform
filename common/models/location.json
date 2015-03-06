@@ -8,14 +8,6 @@
       "type": "geopoint",
       "index": true
     },
-    "Country": {
-      "type": "string",
-      "index": true
-    },
-    "Region": {
-      "type": "string",
-      "index": true
-    },
     "City": {
       "type": "string"
     },
@@ -34,6 +26,19 @@
     },
     "SubRegion": {
       "type": "string"
+    },
+    "Region": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "Country": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "Type": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -41,17 +46,17 @@
     "regionalData": {
       "type": "belongsTo",
       "model": "RegionalData",
-      "foreignKey": "locationId"
+      "foreignKey": "regionalDataId"
     },
     "ogranization": {
       "type": "belongsTo",
       "model": "Ogranization",
-      "foreignKey": "locationId"
+      "foreignKey": "organizationId"
     },
     "project": {
       "type": "belongsTo",
       "model": "Project",
-      "foreignKey": "locationId"
+      "foreignKey": "projectId"
     }
   },
   "acls": [],

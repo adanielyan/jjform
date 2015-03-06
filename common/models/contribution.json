@@ -1,0 +1,28 @@
+{
+  "name": "Contribution",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Amount": {
+      "type": "number",
+      "required": true,
+      "index": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "funder": {
+      "type": "belongsTo",
+      "model": "Funder",
+      "foreignKey": "funderId"
+    },
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": "projectId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

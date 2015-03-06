@@ -49,5 +49,25 @@
   "Ogranization": {
     "dataSource": "MongoDB",
     "public": true
+  },
+  "Contact": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Contribution": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Funder": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Sector": {
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "SubSector": {
+    "dataSource": "MongoDB",
+    "public": true
   }
 }
