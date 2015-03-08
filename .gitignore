@@ -1,4 +1,6 @@
-node_modules
 .DS_Store
+node_modules
 .editorconfig
 .idea
+client/vendor
+sync.log
