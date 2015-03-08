@@ -13,14 +13,38 @@
       "required": true,
       "index": true
     },
-    "ownerId": {
-      "type": "string"
-    },
     "created": {
       "type": "date"
     },
     "modified": {
       "type": "date"
+    },
+    "ownerId": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "URL": {
+      "type": "string"
+    },
+    "Beneficiaries": {
+      "type": "string"
+    },
+    "StartDate": {
+      "type": "date"
+    },
+    "EndDate": {
+      "type": "date"
+    },
+    "ImplementingPartners": {
+      "type": "array"
+    },
+    "TotalFunding": {
+      "type": "number"
+    },
+    "GovFunding": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -33,12 +57,23 @@
     "location": {
       "type": "hasOne",
       "model": "Location",
-      "foreignKey": "locationId"
+      "foreignKey": "projectId"
     },
     "systemUser": {
       "type": "belongsTo",
       "model": "SystemUser",
       "foreignKey": "ownerId"
+    },
+    "contacts": {
+      "type": "hasMany",
+      "model": "Contact",
+      "foreignKey": "projectId"
+    },
+    "funders": {
+      "type": "hasMany",
+      "model": "Funder",
+      "foreignKey": "projectId",
+      "through": "Contribution"
     }
   },
   "acls": [],

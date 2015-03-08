@@ -1,21 +1,20 @@
 {
-  "name": "RegionalData",
+  "name": "Contact",
   "base": "PersistedModel",
   "strict": false,
   "idInjection": false,
   "properties": {
-    "Region": {
-      "type": "string",
-      "index": true
-    },
-    "ContactName": {
+    "Name": {
       "type": "string"
     },
-    "ContactEmail": {
+    "Title": {
       "type": "string"
     },
-    "Funding": {
-      "type": "number"
+    "Email": {
+      "type": "string"
+    },
+    "Phone": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -24,11 +23,6 @@
       "type": "belongsTo",
       "model": "Project",
       "foreignKey": "projectId"
-    },
-    "locations": {
-      "type": "hasMany",
-      "model": "Location",
-      "foreignKey": "regionalDataId"
     }
   },
   "acls": [],

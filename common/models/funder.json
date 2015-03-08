@@ -1,0 +1,22 @@
+{
+  "name": "Funder",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "properties": {
+    "Name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": "funderId",
+      "through": "Contribution"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

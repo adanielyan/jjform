@@ -4,9 +4,6 @@
   "strict": false,
   "idInjection": false,
   "properties": {
-    "Description": {
-      "type": "string"
-    },
     "Name": {
       "type": "string",
       "id": false,
@@ -18,6 +15,10 @@
     },
     "URL": {
       "type": "string"
+    },
+    "Description": {
+      "type": "string",
+      "comments": "Please give a brief description of your organization"
     }
   },
   "validations": [],
@@ -25,7 +26,7 @@
     "location": {
       "type": "hasOne",
       "model": "Location",
-      "foreignKey": "locationId"
+      "foreignKey": "organizationId"
     }
   },
   "acls": [],
