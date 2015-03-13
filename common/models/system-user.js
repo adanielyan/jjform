@@ -1,6 +1,22 @@
 var config = require('../../server/config.json');
 var path = require('path');
+var loopback = require('loopback');
+
 module.exports = function(SystemUser) {
+    SystemUser.observe('before save', function updateTimestamp(ctx, next) {
+        if (ctx.instance) {
+            ctx.instance.created = new Date();
+
+            var token = loopback.getCurrentContext().get('accessToken');
+            if(token !== undefined) {
+                ctx.instance.ownerId = token.userId;
+            }
+        } else {
+            ctx.data.modified = new Date();
+        }
+        next();
+    });
+
     //send verification email after registration
     SystemUser.afterRemote('create', function(context, user) {
         console.log('> user.afterRemote triggered');

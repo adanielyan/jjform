@@ -6,6 +6,15 @@
   "properties": {
     "username": {
       "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "ownerId": {
+      "type": "string"
     }
   },
   "validations": [],

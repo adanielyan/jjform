@@ -37,14 +37,16 @@
     "EndDate": {
       "type": "date"
     },
-    "ImplementingPartners": {
-      "type": "array"
-    },
     "TotalFunding": {
       "type": "number"
     },
     "GovFunding": {
       "type": "number"
+    },
+    "ImplementingPartners": {
+      "type": [
+        "string"
+      ]
     }
   },
   "validations": [],

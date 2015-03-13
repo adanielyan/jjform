@@ -16,6 +16,26 @@
     },
     "Funding": {
       "type": "number"
+    },
+    "Impacts": {
+      "type": [
+        "string"
+      ]
+    },
+    "InfantBeneficiaries": {
+      "type": "number"
+    },
+    "WomanBeneficiaries": {
+      "type": "number"
+    },
+    "created": {
+      "type": "date"
+    },
+    "ownerId": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -28,6 +48,16 @@
     "locations": {
       "type": "hasMany",
       "model": "Location",
+      "foreignKey": "regionalDataId"
+    },
+    "sectors": {
+      "type": "hasMany",
+      "model": "Sector",
+      "foreignKey": "regionalDataId"
+    },
+    "subSectors": {
+      "type": "hasMany",
+      "model": "SubSector",
       "foreignKey": "regionalDataId"
     }
   },
