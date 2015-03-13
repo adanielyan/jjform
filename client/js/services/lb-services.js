@@ -657,6 +657,49 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Organization.projects.findById() instead.
+        "::findById::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Organization.projects.destroyById() instead.
+        "::destroyById::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Organization.projects.updateById() instead.
+        "::updateById::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Organization.projects() instead.
+        "::get::Organization::projects": {
+          isArray: true,
+          url: urlBase + "/Organizations/:id/projects",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Organization.projects.create() instead.
+        "::create::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Organization.projects.destroyAll() instead.
+        "::delete::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Organization.projects.count() instead.
+        "::count::Organization::projects": {
+          url: urlBase + "/Organizations/:id/projects/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use Contact.project() instead.
         "::get::Contact::project": {
           url: urlBase + "/Contacts/:id/project",
@@ -3316,6 +3359,42 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.sectors.findById() instead.
+        "prototype$__findById__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.destroyById() instead.
+        "prototype$__destroyById__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.updateById() instead.
+        "prototype$__updateById__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.findById() instead.
+        "prototype$__findById__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.destroyById() instead.
+        "prototype$__destroyById__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.updateById() instead.
+        "prototype$__updateById__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "PUT"
+        },
+
         // INTERNAL. Use RegionalData.locations() instead.
         "prototype$__get__locations": {
           isArray: true,
@@ -3338,6 +3417,56 @@ module.factory(
         // INTERNAL. Use RegionalData.locations.count() instead.
         "prototype$__count__locations": {
           url: urlBase + "/RegionalData/:id/locations/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.sectors() instead.
+        "prototype$__get__sectors": {
+          isArray: true,
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.create() instead.
+        "prototype$__create__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.destroyAll() instead.
+        "prototype$__delete__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.count() instead.
+        "prototype$__count__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors() instead.
+        "prototype$__get__subSectors": {
+          isArray: true,
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.create() instead.
+        "prototype$__create__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.destroyAll() instead.
+        "prototype$__delete__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.count() instead.
+        "prototype$__count__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/count",
           method: "GET"
         },
 
@@ -4165,6 +4294,532 @@ module.factory(
           var action = TargetResource["::updateById::RegionalData::locations"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.RegionalData.sectors
+     * @header lbServices.RegionalData.sectors
+     * @object
+     * @description
+     *
+     * The object `RegionalData.sectors` groups methods
+     * manipulating `Sector` instances related to `RegionalData`.
+     *
+     * Call {@link lbServices.RegionalData#sectors RegionalData.sectors()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData#sectors
+         * @methodOf lbServices.RegionalData
+         *
+         * @description
+         *
+         * Queries sectors of RegionalData.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::get::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#count
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Counts sectors of RegionalData.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.sectors.count = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::count::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#create
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Creates a new instance in sectors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors.create = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::create::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#destroyAll
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Deletes all sectors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.sectors.destroyAll = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::delete::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#destroyById
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Delete a related item by id for sectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.sectors.destroyById = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::destroyById::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#findById
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Find a related item by id for sectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors.findById = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::findById::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#updateById
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Update a related item by id for sectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors.updateById = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::updateById::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.RegionalData.subSectors
+     * @header lbServices.RegionalData.subSectors
+     * @object
+     * @description
+     *
+     * The object `RegionalData.subSectors` groups methods
+     * manipulating `SubSector` instances related to `RegionalData`.
+     *
+     * Call {@link lbServices.RegionalData#subSectors RegionalData.subSectors()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData#subSectors
+         * @methodOf lbServices.RegionalData
+         *
+         * @description
+         *
+         * Queries subSectors of RegionalData.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::get::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#count
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Counts subSectors of RegionalData.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.subSectors.count = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::count::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#create
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Creates a new instance in subSectors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors.create = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::create::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#destroyAll
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Deletes all subSectors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.subSectors.destroyAll = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::delete::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#destroyById
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Delete a related item by id for subSectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.subSectors.destroyById = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::destroyById::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#findById
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Find a related item by id for subSectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors.findById = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::findById::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#updateById
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Update a related item by id for subSectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors.updateById = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::updateById::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -4206,9 +4861,9 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Location.ogranization() instead.
-        "prototype$__get__ogranization": {
-          url: urlBase + "/Locations/:id/ogranization",
+        // INTERNAL. Use Location.organization() instead.
+        "prototype$__get__organization": {
+          url: urlBase + "/Locations/:id/organization",
           method: "GET"
         },
 
@@ -4620,27 +5275,27 @@ module.factory(
           method: "GET"
         },
 
-        // INTERNAL. Use Ogranization.location() instead.
-        "::get::Ogranization::location": {
-          url: urlBase + "/Ogranizations/:id/location",
+        // INTERNAL. Use Organization.location() instead.
+        "::get::Organization::location": {
+          url: urlBase + "/Organizations/:id/location",
           method: "GET"
         },
 
-        // INTERNAL. Use Ogranization.location.create() instead.
-        "::create::Ogranization::location": {
-          url: urlBase + "/Ogranizations/:id/location",
+        // INTERNAL. Use Organization.location.create() instead.
+        "::create::Organization::location": {
+          url: urlBase + "/Organizations/:id/location",
           method: "POST"
         },
 
-        // INTERNAL. Use Ogranization.location.update() instead.
-        "::update::Ogranization::location": {
-          url: urlBase + "/Ogranizations/:id/location",
+        // INTERNAL. Use Organization.location.update() instead.
+        "::update::Organization::location": {
+          url: urlBase + "/Organizations/:id/location",
           method: "PUT"
         },
 
-        // INTERNAL. Use Ogranization.location.destroy() instead.
-        "::destroy::Ogranization::location": {
-          url: urlBase + "/Ogranizations/:id/location",
+        // INTERNAL. Use Organization.location.destroy() instead.
+        "::destroy::Organization::location": {
+          url: urlBase + "/Organizations/:id/location",
           method: "DELETE"
         },
       }
@@ -4854,12 +5509,12 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Location#ogranization
+         * @name lbServices.Location#organization
          * @methodOf lbServices.Location
          *
          * @description
          *
-         * Fetches belongsTo relation ogranization
+         * Fetches belongsTo relation organization
          *
          * @param {Object=} parameters Request parameters.
          *
@@ -4879,12 +5534,12 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
-        R.ogranization = function() {
-          var TargetResource = $injector.get("Ogranization");
-          var action = TargetResource["::get::Location::ogranization"];
+        R.organization = function() {
+          var TargetResource = $injector.get("Organization");
+          var action = TargetResource["::get::Location::organization"];
           return action.apply(R, arguments);
         };
 
@@ -4893,13 +5548,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name lbServices.Ogranization
- * @header lbServices.Ogranization
+ * @name lbServices.Organization
+ * @header lbServices.Organization
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `Ogranization` model.
+ * A $resource object for interacting with the `Organization` model.
  *
  * ## Example
  *
@@ -4909,41 +5564,84 @@ module.factory(
  *
  */
 module.factory(
-  "Ogranization",
+  "Organization",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/Ogranizations/:id",
+      urlBase + "/Organizations/:id",
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use Ogranization.location() instead.
+        // INTERNAL. Use Organization.location() instead.
         "prototype$__get__location": {
-          url: urlBase + "/Ogranizations/:id/location",
+          url: urlBase + "/Organizations/:id/location",
           method: "GET"
         },
 
-        // INTERNAL. Use Ogranization.location.create() instead.
+        // INTERNAL. Use Organization.location.create() instead.
         "prototype$__create__location": {
-          url: urlBase + "/Ogranizations/:id/location",
+          url: urlBase + "/Organizations/:id/location",
           method: "POST"
         },
 
-        // INTERNAL. Use Ogranization.location.update() instead.
+        // INTERNAL. Use Organization.location.update() instead.
         "prototype$__update__location": {
-          url: urlBase + "/Ogranizations/:id/location",
+          url: urlBase + "/Organizations/:id/location",
           method: "PUT"
         },
 
-        // INTERNAL. Use Ogranization.location.destroy() instead.
+        // INTERNAL. Use Organization.location.destroy() instead.
         "prototype$__destroy__location": {
-          url: urlBase + "/Ogranizations/:id/location",
+          url: urlBase + "/Organizations/:id/location",
           method: "DELETE"
+        },
+
+        // INTERNAL. Use Organization.projects.findById() instead.
+        "prototype$__findById__projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Organization.projects.destroyById() instead.
+        "prototype$__destroyById__projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Organization.projects.updateById() instead.
+        "prototype$__updateById__projects": {
+          url: urlBase + "/Organizations/:id/projects/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Organization.projects() instead.
+        "prototype$__get__projects": {
+          isArray: true,
+          url: urlBase + "/Organizations/:id/projects",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Organization.projects.create() instead.
+        "prototype$__create__projects": {
+          url: urlBase + "/Organizations/:id/projects",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Organization.projects.destroyAll() instead.
+        "prototype$__delete__projects": {
+          url: urlBase + "/Organizations/:id/projects",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Organization.projects.count() instead.
+        "prototype$__count__projects": {
+          url: urlBase + "/Organizations/:id/projects/count",
+          method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#create
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#create
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -4970,18 +5668,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "create": {
-          url: urlBase + "/Ogranizations",
+          url: urlBase + "/Organizations",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#upsert
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#upsert
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5008,18 +5706,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "upsert": {
-          url: urlBase + "/Ogranizations",
+          url: urlBase + "/Organizations",
           method: "PUT"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#exists
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#exists
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5044,14 +5742,14 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/Ogranizations/:id/exists",
+          url: urlBase + "/Organizations/:id/exists",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#findById
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#findById
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5073,18 +5771,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "findById": {
-          url: urlBase + "/Ogranizations/:id",
+          url: urlBase + "/Organizations/:id",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#find
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#find
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5106,19 +5804,19 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "find": {
           isArray: true,
-          url: urlBase + "/Ogranizations",
+          url: urlBase + "/Organizations",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#findOne
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#findOne
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5140,18 +5838,18 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "findOne": {
-          url: urlBase + "/Ogranizations/findOne",
+          url: urlBase + "/Organizations/findOne",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#updateAll
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#updateAll
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5178,14 +5876,14 @@ module.factory(
          * This method returns no data.
          */
         "updateAll": {
-          url: urlBase + "/Ogranizations/update",
+          url: urlBase + "/Organizations/update",
           method: "POST"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#deleteById
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#deleteById
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5208,14 +5906,14 @@ module.factory(
          * This method returns no data.
          */
         "deleteById": {
-          url: urlBase + "/Ogranizations/:id",
+          url: urlBase + "/Organizations/:id",
           method: "DELETE"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#count
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#count
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5240,14 +5938,14 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/Ogranizations/count",
+          url: urlBase + "/Organizations/count",
           method: "GET"
         },
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#prototype$updateAttributes
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#prototype$updateAttributes
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5273,17 +5971,17 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/Ogranizations/:id",
+          url: urlBase + "/Organizations/:id",
           method: "PUT"
         },
 
-        // INTERNAL. Use Location.ogranization() instead.
-        "::get::Location::ogranization": {
-          url: urlBase + "/Locations/:id/ogranization",
+        // INTERNAL. Use Location.organization() instead.
+        "::get::Location::organization": {
+          url: urlBase + "/Locations/:id/organization",
           method: "GET"
         },
       }
@@ -5293,8 +5991,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#updateOrCreate
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#updateOrCreate
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5321,15 +6019,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Ogranization` object.)
+         * This usually means the response is a `Organization` object.)
          * </em>
          */
         R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#update
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#update
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5359,8 +6057,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#destroyById
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#destroyById
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5386,8 +6084,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#removeById
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#removeById
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5414,33 +6112,33 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name lbServices.Ogranization#modelName
-    * @propertyOf lbServices.Ogranization
+    * @name lbServices.Organization#modelName
+    * @propertyOf lbServices.Organization
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `Ogranization`.
+    * i.e. `Organization`.
     */
-    R.modelName = "Ogranization";
+    R.modelName = "Organization";
 
     /**
      * @ngdoc object
-     * @name lbServices.Ogranization.location
-     * @header lbServices.Ogranization.location
+     * @name lbServices.Organization.location
+     * @header lbServices.Organization.location
      * @object
      * @description
      *
-     * The object `Ogranization.location` groups methods
-     * manipulating `Location` instances related to `Ogranization`.
+     * The object `Organization.location` groups methods
+     * manipulating `Location` instances related to `Organization`.
      *
-     * Call {@link lbServices.Ogranization#location Ogranization.location()}
+     * Call {@link lbServices.Organization#location Organization.location()}
      * to query all related instances.
      */
 
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization#location
-         * @methodOf lbServices.Ogranization
+         * @name lbServices.Organization#location
+         * @methodOf lbServices.Organization
          *
          * @description
          *
@@ -5469,14 +6167,14 @@ module.factory(
          */
         R.location = function() {
           var TargetResource = $injector.get("Location");
-          var action = TargetResource["::get::Ogranization::location"];
+          var action = TargetResource["::get::Organization::location"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization.location#create
-         * @methodOf lbServices.Ogranization.location
+         * @name lbServices.Organization.location#create
+         * @methodOf lbServices.Organization.location
          *
          * @description
          *
@@ -5507,14 +6205,14 @@ module.factory(
          */
         R.location.create = function() {
           var TargetResource = $injector.get("Location");
-          var action = TargetResource["::create::Ogranization::location"];
+          var action = TargetResource["::create::Organization::location"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization.location#destroy
-         * @methodOf lbServices.Ogranization.location
+         * @name lbServices.Organization.location#destroy
+         * @methodOf lbServices.Organization.location
          *
          * @description
          *
@@ -5538,14 +6236,14 @@ module.factory(
          */
         R.location.destroy = function() {
           var TargetResource = $injector.get("Location");
-          var action = TargetResource["::destroy::Ogranization::location"];
+          var action = TargetResource["::destroy::Organization::location"];
           return action.apply(R, arguments);
         };
 
         /**
          * @ngdoc method
-         * @name lbServices.Ogranization.location#update
-         * @methodOf lbServices.Ogranization.location
+         * @name lbServices.Organization.location#update
+         * @methodOf lbServices.Organization.location
          *
          * @description
          *
@@ -5576,7 +6274,270 @@ module.factory(
          */
         R.location.update = function() {
           var TargetResource = $injector.get("Location");
-          var action = TargetResource["::update::Ogranization::location"];
+          var action = TargetResource["::update::Organization::location"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Organization.projects
+     * @header lbServices.Organization.projects
+     * @object
+     * @description
+     *
+     * The object `Organization.projects` groups methods
+     * manipulating `Project` instances related to `Organization`.
+     *
+     * Call {@link lbServices.Organization#projects Organization.projects()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization#projects
+         * @methodOf lbServices.Organization
+         *
+         * @description
+         *
+         * Queries projects of Organization.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.projects = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::get::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#count
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Counts projects of Organization.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.projects.count = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::count::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#create
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Creates a new instance in projects of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.projects.create = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::create::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#destroyAll
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Deletes all projects of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.projects.destroyAll = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::delete::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#destroyById
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Delete a related item by id for projects
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for projects
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.projects.destroyById = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::destroyById::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#findById
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Find a related item by id for projects
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for projects
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.projects.findById = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::findById::Organization::projects"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Organization.projects#updateById
+         * @methodOf lbServices.Organization.projects
+         *
+         * @description
+         *
+         * Update a related item by id for projects
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for projects
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Project` object.)
+         * </em>
+         */
+        R.projects.updateById = function() {
+          var TargetResource = $injector.get("Project");
+          var action = TargetResource["::updateById::Organization::projects"];
           return action.apply(R, arguments);
         };
 
@@ -8176,6 +9137,49 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.sectors.findById() instead.
+        "::findById::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.destroyById() instead.
+        "::destroyById::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.updateById() instead.
+        "::updateById::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.sectors() instead.
+        "::get::RegionalData::sectors": {
+          isArray: true,
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.create() instead.
+        "::create::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.destroyAll() instead.
+        "::delete::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.count() instead.
+        "::count::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/count",
+          method: "GET"
+        },
+
         // INTERNAL. Use SubSector.sector() instead.
         "::get::SubSector::sector": {
           url: urlBase + "/SubSectors/:id/sector",
@@ -8954,6 +9958,49 @@ module.factory(
         "prototype$updateAttributes": {
           url: urlBase + "/SubSectors/:id",
           method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.findById() instead.
+        "::findById::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.destroyById() instead.
+        "::destroyById::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.updateById() instead.
+        "::updateById::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors() instead.
+        "::get::RegionalData::subSectors": {
+          isArray: true,
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.create() instead.
+        "::create::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.destroyAll() instead.
+        "::delete::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.count() instead.
+        "::count::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/count",
+          method: "GET"
         },
 
         // INTERNAL. Use Sector.subSectors.findById() instead.

@@ -1,5 +1,5 @@
 {
-  "name": "Ogranization",
+  "name": "Organization",
   "base": "PersistedModel",
   "strict": false,
   "idInjection": false,
@@ -26,6 +26,11 @@
     "location": {
       "type": "hasOne",
       "model": "Location",
+      "foreignKey": "organizationId"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
       "foreignKey": "organizationId"
     }
   },

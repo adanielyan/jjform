@@ -28,6 +28,12 @@
     "WomanBeneficiaries": {
       "type": "number"
     },
+    "IndirectInfantBeneficiaries": {
+      "type": "number"
+    },
+    "IndirectWomanBeneficiaries": {
+      "type": "number"
+    },
     "created": {
       "type": "date"
     },

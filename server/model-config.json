@@ -46,7 +46,7 @@
     "dataSource": "MongoDB",
     "public": true
   },
-  "Ogranization": {
+  "Organization": {
     "dataSource": "MongoDB",
     "public": true
   },

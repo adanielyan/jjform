@@ -48,9 +48,9 @@
       "model": "RegionalData",
       "foreignKey": "regionalDataId"
     },
-    "ogranization": {
+    "organization": {
       "type": "belongsTo",
-      "model": "Ogranization",
+      "model": "Organization",
       "foreignKey": "organizationId"
     },
     "project": {

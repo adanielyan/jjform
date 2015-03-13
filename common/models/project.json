@@ -76,6 +76,11 @@
       "model": "Funder",
       "foreignKey": "projectId",
       "through": "Contribution"
+    },
+    "ogranization": {
+      "type": "belongsTo",
+      "model": "Ogranization",
+      "foreignKey": "organizationId"
     }
   },
   "acls": [],
