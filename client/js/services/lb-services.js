@@ -3359,6 +3359,30 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.contact() instead.
+        "prototype$__get__contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.contact.create() instead.
+        "prototype$__create__contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.contact.update() instead.
+        "prototype$__update__contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.contact.destroy() instead.
+        "prototype$__destroy__contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "DELETE"
+        },
+
         // INTERNAL. Use RegionalData.sectors.findById() instead.
         "prototype$__findById__sectors": {
           url: urlBase + "/RegionalData/:id/sectors/:fk",
@@ -4292,6 +4316,163 @@ module.factory(
         R.locations.updateById = function() {
           var TargetResource = $injector.get("Location");
           var action = TargetResource["::updateById::RegionalData::locations"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.RegionalData.contact
+     * @header lbServices.RegionalData.contact
+     * @object
+     * @description
+     *
+     * The object `RegionalData.contact` groups methods
+     * manipulating `Contact` instances related to `RegionalData`.
+     *
+     * Call {@link lbServices.RegionalData#contact RegionalData.contact()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData#contact
+         * @methodOf lbServices.RegionalData
+         *
+         * @description
+         *
+         * Fetches hasOne relation contact
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Contact` object.)
+         * </em>
+         */
+        R.contact = function() {
+          var TargetResource = $injector.get("Contact");
+          var action = TargetResource["::get::RegionalData::contact"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.contact#create
+         * @methodOf lbServices.RegionalData.contact
+         *
+         * @description
+         *
+         * Creates a new instance in contact of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Contact` object.)
+         * </em>
+         */
+        R.contact.create = function() {
+          var TargetResource = $injector.get("Contact");
+          var action = TargetResource["::create::RegionalData::contact"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.contact#destroy
+         * @methodOf lbServices.RegionalData.contact
+         *
+         * @description
+         *
+         * Deletes contact of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.contact.destroy = function() {
+          var TargetResource = $injector.get("Contact");
+          var action = TargetResource["::destroy::RegionalData::contact"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.contact#update
+         * @methodOf lbServices.RegionalData.contact
+         *
+         * @description
+         *
+         * Update contact of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Contact` object.)
+         * </em>
+         */
+        R.contact.update = function() {
+          var TargetResource = $injector.get("Contact");
+          var action = TargetResource["::update::RegionalData::contact"];
           return action.apply(R, arguments);
         };
     /**
@@ -6957,6 +7138,30 @@ module.factory(
         "::count::Project::contacts": {
           url: urlBase + "/Projects/:id/contacts/count",
           method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.contact() instead.
+        "::get::RegionalData::contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "GET"
+        },
+
+        // INTERNAL. Use RegionalData.contact.create() instead.
+        "::create::RegionalData::contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "POST"
+        },
+
+        // INTERNAL. Use RegionalData.contact.update() instead.
+        "::update::RegionalData::contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.contact.destroy() instead.
+        "::destroy::RegionalData::contact": {
+          url: urlBase + "/RegionalData/:id/contact",
+          method: "DELETE"
         },
       }
     );

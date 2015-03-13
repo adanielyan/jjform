@@ -1,7 +1,7 @@
 angular
     .module('app')
-    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData',
-        function($rootScope, $scope, $state, Project, RegionalData) {
+    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData', 'Contact',
+        function($rootScope, $scope, $state, Project, RegionalData, Contact) {
 
         $scope.data = $scope.data || {};
 
@@ -9,7 +9,7 @@ angular
             if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
                 delete $scope.data.project;
                 delete $scope.data.regionalData;
-                console.log($state);
+                //console.log($state);
                 $scope.initProject();
             }
         });
@@ -38,17 +38,25 @@ angular
                 .$promise
                 .then(function(project) {
                     $scope.data.project = project;
+                    //REDO all this as the iterations are gettings messed up. Need a way to fix the closures.
                     var iteration = 0;
                     for(var i=0; i < $scope.data.regionalData.length; i++) {
                         $scope.data.regionalData[i]['projectId'] = project.id;
                         RegionalData
                             .upsert($scope.data.regionalData[i])
                             .$promise
-                            .then(function(projectData) {
-                                iteration++;
-                                if(iteration == $scope.data.regionalData.length) {
-                                    $state.transitionTo('project.details', {projectId: project.id}, {location: true, notify: true, reload: true});
-                                }
+                            .then(function(regionalData) {
+                                $scope.data.regionalData[iteration].contact['regionalDataId'] = regionalData.id;
+                                Contact
+                                .upsert($scope.data.regionalData[iteration].contact)
+                                .$promise
+                                .then(function(contact) {
+                                    console.log("Contact " + contact.Name + "created successfully.");
+                                    iteration++;
+                                    if(iteration == $scope.data.regionalData.length) {
+                                        $state.transitionTo('project.details', {projectId: project.id}, {location: true, notify: true, reload: true});
+                                    }
+                                });
                             });
                     }
                 });
@@ -70,12 +78,27 @@ angular
                 .$promise
                 .then(function(results) {
                     $scope.data.regionalData = results;
+                    //REDO all this as the iterations are gettings messed up. Need a way to fix the closures.
+                    var iteration = 0;
+                    for(var i=0; i < $scope.data.regionalData.length; i++) {
+                        RegionalData.contact($scope.data.regionalData[i])
+                            .$promise
+                            .then(function(contact) {
+                                $scope.data.regionalData[iteration].contact = contact;
+                                iteration++;
+                            });
+                    }
+                    console.log($scope.data.regionalData);
                 });
         };
 
         $scope.addProjectRegionalData = function($event) {
             $scope.data.regionalData.push({});
-            $event.preventDefault();
+            //$event.preventDefault();
+        };
+
+        $scope.removeProjectRegionalData = function(index) {
+            $scope.data.regionalData.splice(index, 1);
         };
 
         //console.log($state.params);
@@ -87,7 +110,8 @@ angular
             }
             else {
                 $scope.data.project = $scope.data.project || {};
-                $scope.data.regionalData = $scope.data.regionalData || [];
+                $scope.data.regionalData = $scope.data.regionalData || [{}];
+                $scope.data.regionalData.contact = $scope.data.regionalData.contact || {};
             }
         };
 

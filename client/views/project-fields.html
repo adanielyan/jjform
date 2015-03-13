@@ -8,6 +8,10 @@
         data.projectForm.Name.$invalid && data.projectForm.Name.$dirty">
       Project Name is required.
     </span>
+</div>
+<div class="form-group"
+     ng-class="{'has-error': data.projectForm.Description.$invalid
+        && data.projectForm.Description.$dirty}">
     <textarea class="form-control" name="Description"
            placeholder="Project Description" autocomplete="off" required
            ng-model="data.project.Description"></textarea>

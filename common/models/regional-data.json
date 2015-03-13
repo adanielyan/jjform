@@ -51,6 +51,11 @@
       "model": "Project",
       "foreignKey": "projectId"
     },
+    "contact": {
+      "type": "hasOne",
+      "model": "Contact",
+      "foreignKey": "regionalDataId"
+    },
     "locations": {
       "type": "hasMany",
       "model": "Location",

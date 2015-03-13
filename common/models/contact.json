@@ -23,6 +23,11 @@
       "type": "belongsTo",
       "model": "Project",
       "foreignKey": "projectId"
+    },
+    "regionalData": {
+      "type": "belongsTo",
+      "model": "regionalData",
+      "foreignKey": "regionalDataId"
     }
   },
   "acls": [],
