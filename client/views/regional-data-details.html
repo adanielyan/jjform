@@ -6,19 +6,28 @@
                 <div class="form-group" ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations">
                     <div class="form-group">
                         <input type="text" class="form-control" name="RegionLocationName[regionLocation][locationIndex]"
-                               placeholder="Activity Street Address" autocomplete="off"
-                               ng-model="regionLocation.Address">
+                               placeholder="Activity Location Name" autocomplete="off"
+                               ng-model="regionLocation.Name">
                     </div>
 
                     <div class="form-group">
+                        <input type="text" class="form-control" name="RegionLocationCountry[regionLocation][locationIndex]"
+                               placeholder="Activity Location Country" autocomplete="off" required
+                               ng-model="regionLocation.Country">
+                    </div>
+                    <span class="has-error control-label" ng-show="RegionLocationCountry[regionLocation][locationIndex].$invalid && RegionLocationCountry[regionLocation][locationIndex].$dirty">
+                        Location Country is required.
+                    </span>
+
+                    <div class="form-group">
                         <input type="text" class="form-control" name="RegionLocationAddress[regionLocation][locationIndex]"
-                               placeholder="Activity Street Address" autocomplete="off"
+                               placeholder="Activity Location Street Address" autocomplete="off"
                                ng-model="regionLocation.Address">
                     </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control" name="RegionLocationCity[regionLocation][locationIndex]"
-                               placeholder="Organization City" autocomplete="on" required
+                               placeholder="Activity Location City" autocomplete="on" required
                                ng-model="regionLocation.City">
                     </div>
                     <span class="has-error control-label" ng-show="RegionLocationCity[regionLocation][locationIndex].$invalid && RegionLocationCity[regionLocation][locationIndex].$dirty">
@@ -27,7 +36,7 @@
 
                     <div class="form-group">
                         <input type="text" class="form-control" name="OrgRegion"
-                               ng-model="regionLocation.Region" ng-init="getProjectRegion(regionIndex)"
+                               ng-model="regionalDatum.Region"
                                ng-disabled="true">
                     </div>
 

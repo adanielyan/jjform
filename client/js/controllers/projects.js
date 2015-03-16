@@ -1,7 +1,7 @@
 angular
     .module('app')
-    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData', 'Contact',
-        function($rootScope, $scope, $state, Project, RegionalData, Contact) {
+    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData', 'Contact', 'Location',
+        function($rootScope, $scope, $state, Project, RegionalData, Contact, Location) {
 
             $scope.data = $scope.data || {};
 
@@ -59,6 +59,18 @@ angular
                                                     });
                                                 }
                                             });
+                                        for(var j=0; j < $scope.data.regionalData[i].locations.length; j++) {
+                                            (function(j) {
+                                                $scope.data.regionalData[i].locations[j]['Region'] = regionalData.Region;
+                                                $scope.data.regionalData[i].locations[j]['regionalDataId'] = regionalData.id;
+                                                Location
+                                                    .upsert($scope.data.regionalData[i].locations[j])
+                                                    .$promise
+                                                    .then(function (location) {
+                                                        console.log("Location " + location.Name + "created successfully.");
+                                                    });
+                                            })(j);
+                                        }
                                     });
                             })(i);
                         }
