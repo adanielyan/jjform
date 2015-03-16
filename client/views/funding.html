@@ -1,0 +1,21 @@
+<div class="form-group"
+     ng-class="{'has-error': data.project.TotalFunding.$invalid
+        && data.project.TotalFunding.$dirty}">
+    <input type="number" class="form-control" name="ProjectTotalFunding"
+           placeholder="Project Total Funding in USD" autocomplete="off" required
+           ng-model="data.project.TotalFunding">
+    <span class="has-error control-label" ng-show="
+        data.project.TotalFunding.$invalid && data.project.TotalFunding.$dirty">
+      Project Total Funding is required.
+    </span>
+</div>
+
+<div class="list-group">
+    <div class="form-group form-inline" ng-repeat="regionalDatum in data.regionalData">
+        <input type="text" class="form-control" name="Region"
+               ng-model="regionalDatum.Region" ng-disabled="true">
+        <input type="number" class="form-control" name="RegionFunding"
+               placeholder="Region Funding in USD"
+               ng-model="regionalDatum.Funding">
+    </div>
+</div>

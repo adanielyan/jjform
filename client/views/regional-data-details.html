@@ -1,0 +1,41 @@
+<div class="list-group">
+    <div ng-repeat="(regionIndex, regionalDatum) in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{regionalDatum.Region}}</div>
+            <div class="panel-body">
+                <div class="form-group" ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="RegionLocationName[regionLocation][locationIndex]"
+                               placeholder="Activity Street Address" autocomplete="off"
+                               ng-model="regionLocation.Address">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="RegionLocationAddress[regionLocation][locationIndex]"
+                               placeholder="Activity Street Address" autocomplete="off"
+                               ng-model="regionLocation.Address">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="RegionLocationCity[regionLocation][locationIndex]"
+                               placeholder="Organization City" autocomplete="on" required
+                               ng-model="regionLocation.City">
+                    </div>
+                    <span class="has-error control-label" ng-show="RegionLocationCity[regionLocation][locationIndex].$invalid && RegionLocationCity[regionLocation][locationIndex].$dirty">
+                        Location City is required.
+                    </span>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="OrgRegion"
+                               ng-model="regionLocation.Region" ng-init="getProjectRegion(regionIndex)"
+                               ng-disabled="true">
+                    </div>
+
+                    <button class="btn btn-danger" type="button" ng-click="removeRegionalDataLocation(regionIndex, locationIndex)">Remove Location <span class="glyphicon glyphicon-trash"></span></button>
+
+                </div>
+                <button class="btn btn-default" type="button" ng-click="addRegionalDataLocation(regionIndex, $event)">Add Location</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,22 +1,23 @@
 <div class="form-group"
-     ng-class="{'has-error': data.projectForm.Name.$invalid
-        && data.projectForm.Name.$dirty}">
-    <input type="text" class="form-control focus" name="Name"
+     ng-class="{'has-error': data.project.Name.$invalid
+        && data.project.Name.$dirty}">
+    <input type="text" class="form-control" name="ProjectName"
            placeholder="Project Name" autocomplete="off" required
            ng-model="data.project.Name">
     <span class="has-error control-label" ng-show="
-        data.projectForm.Name.$invalid && data.projectForm.Name.$dirty">
+        data.project.Name.$invalid && data.project.Name.$dirty">
       Project Name is required.
     </span>
 </div>
+
 <div class="form-group"
-     ng-class="{'has-error': data.projectForm.Description.$invalid
-        && data.projectForm.Description.$dirty}">
-    <textarea class="form-control" name="Description"
+     ng-class="{'has-error': data.project.Description.$invalid
+        && data.project.Description.$dirty}">
+    <textarea class="form-control" name="ProjectDescription"
            placeholder="Project Description" autocomplete="off" required
            ng-model="data.project.Description"></textarea>
     <span class="has-error control-label" ng-show="
-        data.projectForm.Name.$invalid && data.projectForm.Name.$dirty">
-      Project Name is required.
+        data.project.Description.$invalid && data.project.Description.$dirty">
+      Project Description is required.
     </span>
 </div>

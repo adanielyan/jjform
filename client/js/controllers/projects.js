@@ -3,120 +3,163 @@ angular
     .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Project', 'RegionalData', 'Contact',
         function($rootScope, $scope, $state, Project, RegionalData, Contact) {
 
-        $scope.data = $scope.data || {};
+            $scope.data = $scope.data || {};
 
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-            if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
-                delete $scope.data.project;
-                delete $scope.data.regionalData;
-                //console.log($state);
-                $scope.initProject();
-            }
-        });
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
+                    delete $scope.data.project;
+                    delete $scope.data.regionalData;
+                    //console.log($state);
+                    $scope.initProject();
+                }
+            });
 
-        $scope.getProjects = function() {
-            Project
-                .find()
-                .$promise
-                .then(function(results) {
-                    $scope.data.projects = results;
-                });
-        };
+            $scope.getProjects = function() {
+                Project
+                    .find()
+                    .$promise
+                    .then(function(results) {
+                        $scope.data.projects = results;
+                    });
+            };
 
-        $scope.getProjectById = function(item) {
-            Project
-                .findById(item)
-                .$promise
-                .then(function(result) {
-                    $scope.data.project = result;
-                });
-        };
+            $scope.getProjectById = function(item) {
+                Project
+                    .findById(item)
+                    .$promise
+                    .then(function(result) {
+                        $scope.data.project = result;
+                    });
+            };
 
-        $scope.saveProject = function() {
-            Project
-                .upsert($scope.data.project)
-                .$promise
-                .then(function(project) {
-                    $scope.data.project = project;
-                    //REDO all this as the iterations are gettings messed up. Need a way to fix the closures.
-                    var iteration = 0;
-                    for(var i=0; i < $scope.data.regionalData.length; i++) {
-                        $scope.data.regionalData[i]['projectId'] = project.id;
-                        RegionalData
-                            .upsert($scope.data.regionalData[i])
+            $scope.saveProject = function() {
+                Project
+                    .upsert($scope.data.project)
+                    .$promise
+                    .then(function(project) {
+                        $scope.data.project = project;
+                        for(var i=0; i < $scope.data.regionalData.length; i++) {
+                            (function(i) {
+                                $scope.data.regionalData[i]['projectId'] = project.id;
+                                RegionalData
+                                    .upsert($scope.data.regionalData[i])
+                                    .$promise
+                                    .then(function (regionalData) {
+                                        $scope.data.regionalData[i].contact['regionalDataId'] = regionalData.id;
+                                        Contact
+                                            .upsert($scope.data.regionalData[i].contact)
+                                            .$promise
+                                            .then(function (contact) {
+                                                console.log("Contact " + contact.Name + "created successfully.");
+                                                if (i == $scope.data.regionalData.length-1) {
+                                                    $state.transitionTo('project.details', {projectId: project.id}, {
+                                                        location: true,
+                                                        notify: true,
+                                                        reload: true
+                                                    });
+                                                }
+                                            });
+                                    });
+                            })(i);
+                        }
+                    });
+            };
+
+            $scope.removeProject = function($event, item) {
+                Project
+                    .deleteById(item)
+                    .$promise
+                    .then(function() {
+                        $state.go('project.new');
+                    });
+                $event.preventDefault();
+            };
+
+            $scope.getProjectRegionalData = function(item) {
+                Project
+                    .regionalData(item)
+                    .$promise
+                    .then(function(results) {
+                        $scope.data.regionalData = results;
+                        for(var i=0; i < $scope.data.regionalData.length; i++) {
+                            (function(i) {
+                                RegionalData.contact($scope.data.regionalData[i])
+                                    .$promise
+                                    .then(function(contact) {
+                                        $scope.data.regionalData[i].contact = contact;
+                                    });
+                            })(i);
+                        }
+                        for(var i=0; i < $scope.data.regionalData.length; i++) {
+                            (function(i) {
+                                RegionalData.locations($scope.data.regionalData[i])
+                                    .$promise
+                                    .then(function(locations) {
+                                        $scope.data.regionalData[i].locations = locations || [{}];
+                                    });
+                            })(i);
+                        }
+                        //console.log($scope.data.regionalData);
+                    });
+            };
+
+            $scope.addProjectRegionalData = function($event) {
+                $scope.data.regionalData.push({});
+                //$event.preventDefault();
+            };
+
+            $scope.removeProjectRegionalData = function(index) {
+                RegionalData.contact
+                    .destroy({id: $scope.data.regionalData[index].id})
+                    .$promise
+                    .then(function() {
+                        console.log("Contact for region " + $scope.data.regionalData[index].Name + " is destroyed.");
+                        Project.regionalData
+                            .destroyById({id: $scope.data.regionalData[index].projectId, fk: $scope.data.regionalData[index].id})
                             .$promise
-                            .then(function(regionalData) {
-                                $scope.data.regionalData[iteration].contact['regionalDataId'] = regionalData.id;
-                                Contact
-                                .upsert($scope.data.regionalData[iteration].contact)
-                                .$promise
-                                .then(function(contact) {
-                                    console.log("Contact " + contact.Name + "created successfully.");
-                                    iteration++;
-                                    if(iteration == $scope.data.regionalData.length) {
-                                        $state.transitionTo('project.details', {projectId: project.id}, {location: true, notify: true, reload: true});
-                                    }
-                                });
+                            .then(function() {
+                                console.log("Region " + $scope.data.regionalData[index].Name + " is destroyed.");
+                                $scope.data.regionalData.splice(index, 1);
                             });
-                    }
-                });
-        };
+                    });
+            };
 
-        $scope.removeProject = function($event, item) {
-            Project
-                .deleteById(item)
-                .$promise
-                .then(function() {
-                    $state.go('project.new');
-                });
-            $event.preventDefault();
-        };
+            $scope.getProjectRegion = function(regionIndex) {
+                return $scope.data.regionalData[regionIndex].Region;
+            };
 
-        $scope.getProjectRegionalData = function(item) {
-            Project
-                .regionalData(item)
-                .$promise
-                .then(function(results) {
-                    $scope.data.regionalData = results;
-                    //REDO all this as the iterations are gettings messed up. Need a way to fix the closures.
-                    var iteration = 0;
-                    for(var i=0; i < $scope.data.regionalData.length; i++) {
-                        RegionalData.contact($scope.data.regionalData[i])
-                            .$promise
-                            .then(function(contact) {
-                                $scope.data.regionalData[iteration].contact = contact;
-                                iteration++;
-                            });
-                    }
-                    console.log($scope.data.regionalData);
-                });
-        };
+            $scope.addRegionalDataLocation = function(regionIndex, $event) {
+                $scope.data.regionalData[regionIndex].locations.push({});
+                //$event.preventDefault();
+            };
 
-        $scope.addProjectRegionalData = function($event) {
-            $scope.data.regionalData.push({});
-            //$event.preventDefault();
-        };
+            $scope.removeRegionalDataLocation = function(regionIndex, locationIndex) {
+                RegionalData.locations
+                    .destroyById({id: $scope.data.regionalData[regionIndex].id, fk: $scope.data.regionalData[regionIndex].locations[locationIndex].id})
+                    .$promise
+                    .then(function() {
+                        console.log("Location " + $scope.data.regionalData[regionIndex].locations[locationIndex].Name + " for region " + $scope.data.regionalData[regionIndex].Name + " is destroyed.");
+                        $scope.data.regionalData[regionIndex].locations.splice(locationIndex, 1);
+                    });
+            };
 
-        $scope.removeProjectRegionalData = function(index) {
-            $scope.data.regionalData.splice(index, 1);
-        };
 
-        //console.log($state.params);
+            //console.log($state.params);
 
-        $scope.initProject = function() {
-            if ($state.params.projectId !== undefined) {
-                $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId});
-                $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
-            }
-            else {
-                $scope.data.project = $scope.data.project || {};
-                $scope.data.regionalData = $scope.data.regionalData || [{}];
-                $scope.data.regionalData.contact = $scope.data.regionalData.contact || {};
-            }
-        };
+            $scope.initProject = function() {
+                if ($state.params.projectId !== undefined) {
+                    $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId});
+                    $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
+                }
+                else {
+                    $scope.data.project = $scope.data.project || {};
+                    $scope.data.regionalData = $scope.data.regionalData || [{}];
+                    $scope.data.regionalData.contact = $scope.data.regionalData.contact || {};
+                }
+            };
 
-        $scope.initProjects = function() {
-            $scope.data.projects = $scope.data.projects || $scope.getProjects();
-        };
+            $scope.initProjects = function() {
+                $scope.data.projects = $scope.data.projects || $scope.getProjects();
+            };
 
-    }]);
+        }]);

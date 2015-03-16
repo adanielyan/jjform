@@ -1,0 +1,53 @@
+<div class="form-group"
+     ng-class="{'has-error': data.organization.Name.$invalid
+        && data.organization.Name.$dirty}">
+    <input type="text" class="form-control focus" name="OrgName"
+           placeholder="Organization Name" autocomplete="off" required
+           ng-model="data.organization.Name">
+    <span class="has-error control-label" ng-show="
+        data.organization.Name.$invalid && data.organization.Name.$dirty">
+      Organization Name is required.
+    </span>
+</div>
+
+<div class="form-group"
+     ng-class="{'has-error': data.organization.Description.$invalid
+        && data.organization.Description.$dirty}">
+    <textarea class="form-control" name="OrgDescription"
+             placeholder="Organization Description" autocomplete="off" required
+             ng-model="data.organization.Description"></textarea>
+    <span class="has-error control-label" ng-show="
+        data.organization.Description.$invalid && data.organization.Description.$dirty">
+      Organization Description is required.
+    </span>
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control" name="OrgAddress"
+           placeholder="Organization Street Address" autocomplete="off"
+           ng-model="data.organization.location.Address">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control" name="OrgCity"
+           placeholder="Organization City" autocomplete="on"
+           ng-model="data.organization.location.City">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control" name="OrgRegion"
+           placeholder="Organization State/Province/Region" autocomplete="on"
+           ng-model="data.organization.location.Region">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control" name="OrgPhone"
+           placeholder="Organization Telephone Number" autocomplete="on"
+           ng-model="data.organization.Phone">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control" name="OrgWebsite"
+           placeholder="Organization Website" autocomplete="on"
+           ng-model="data.organization.URL">
+</div>

@@ -1,6 +1,6 @@
 <div class="list-group">
     <div class="form-group form-inline" ng-repeat="regionalDatum in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
-        <input type="text" class="form-control" name="Region"
+        <input type="text" class="form-control" name="RegionName"
                placeholder="Region Name" autocomplete="off"
                ng-model="regionalDatum.Region">
         <input type="text" class="form-control" name="RegionContact"
@@ -10,7 +10,7 @@
                placeholder="Regional Contact Email" autocomplete="off"
                ng-model="regionalDatum.contact.Email">
         <button class="btn btn-danger" type="button" ng-click="removeProjectRegionalData($index)">Remove Region <span class="glyphicon glyphicon-trash"></span></button>
-        <span class="has-error control-label" ng-show="Region.$invalid && Region.$dirty">
+        <span class="has-error control-label" ng-show="RegionName.$invalid && RegionName.$dirty">
             Region Name is required.
         </span>
     </div>
