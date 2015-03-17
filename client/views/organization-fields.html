@@ -13,7 +13,7 @@
 <div class="form-group"
      ng-class="{'has-error': data.organization.Description.$invalid
         && data.organization.Description.$dirty}">
-    <textarea class="form-control" name="OrgDescription"
+    <textarea class="form-control" rows="5" name="OrgDescription"
              placeholder="Organization Description" autocomplete="off" required
              ng-model="data.organization.Description"></textarea>
     <span class="has-error control-label" ng-show="
