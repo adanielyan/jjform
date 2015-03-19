@@ -9,11 +9,8 @@
         <small>Project Descriptive Information</small>
     </h3>
     <div ui-view="project"></div>
-    <h4>Regions and Regional Contacts</h4>
     <div ui-view="regionalData"></div>
-    <h4>Funding</h4>
     <div ui-view="funding"></div>
-    <h3>Regional Information</h3>
     <div ui-view="regionalDataDetails"></div>
 
     <button class="btn btn-default" type="button" ng-disabled="projectForm.$invalid" ng-click="saveProject()">Save</button>

@@ -1,18 +1,30 @@
-<div class="list-group">
-    <div class="form-group form-inline" ng-repeat="regionalDatum in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
-        <input type="text" class="form-control" name="RegionName"
-               placeholder="Region Name" autocomplete="off"
-               ng-model="regionalDatum.Region">
-        <input type="text" class="form-control" name="RegionContact"
-               placeholder="Regional Contact Name" autocomplete="off"
-               ng-model="regionalDatum.contact.Name">
-        <input type="email" class="form-control" name="RegionContactEmail"
-               placeholder="Regional Contact Email" autocomplete="off"
-               ng-model="regionalDatum.contact.Email">
-        <button class="btn btn-danger" type="button" ng-click="removeProjectRegionalData($index)">Remove Region <span class="glyphicon glyphicon-trash"></span></button>
-        <span class="has-error control-label" ng-show="RegionName.$invalid && RegionName.$dirty">
-            Region Name is required.
-        </span>
+<div class="panel panel-default">
+    <div class="panel-heading">Regions and Regional Contacts</div>
+    <div class="panel-body">
+        <p>
+            Please list all the regions in which your project is implemented.
+            If there is a regional point of contact that will be providing information about project activities in this region,
+            please provide the name and email address in the field to the right of the region field.
+        </p>
+        <div class="list-group">
+            <div class="form-group form-inline" ng-repeat="regionalDatum in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
+                <input type="text" class="form-control" name="RegionName"
+                       placeholder="Region Name" autocomplete="off"
+                       ng-model="regionalDatum.Region">
+                <input type="text" class="form-control" name="RegionContact"
+                       placeholder="Regional Contact Name" autocomplete="off"
+                       ng-model="regionalDatum.contact.Name">
+                <input type="email" class="form-control" name="RegionContactEmail"
+                       placeholder="Regional Contact Email" autocomplete="off"
+                       ng-model="regionalDatum.contact.Email">
+                <button class="btn btn-danger" type="button" ng-click="removeProjectRegionalData($index)">Remove Region <span class="glyphicon glyphicon-trash"></span></button>
+                <span class="has-error control-label" ng-show="RegionName.$invalid && RegionName.$dirty">
+                    Region Name is required.
+                </span>
+            </div>
+
+            <label for="addRegion" ng-hide="data.regionalData.length > 0">To add a Region please click on <em>Add Region</em> button below</label><br>
+            <button class="btn btn-default" type="button" ng-disabled="Region.$invalid" ng-click="addProjectRegionalData($event)" name="addRegion">Add Region</button>
+        </div>
     </div>
-    <button class="btn btn-default" type="button" ng-disabled="Region.$invalid" ng-click="addProjectRegionalData($event)">Add Region</button>
 </div>

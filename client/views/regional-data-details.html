@@ -1,5 +1,6 @@
 <div class="list-group">
     <div ng-repeat="(regionIndex, regionalDatum) in data.regionalData" ng-class="{'has-error': Region.$invalid && Region.$dirty}">
+        <h3>Regional Information</h3>
         <div class="panel panel-default">
             <div class="panel-heading">{{regionalDatum.Region}}</div>
             <div class="panel-body">

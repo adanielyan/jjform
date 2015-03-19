@@ -1,6 +1,7 @@
 <div class="form-group"
      ng-class="{'has-error': data.organization.Name.$invalid
         && data.organization.Name.$dirty}">
+    <label for=OrgName"">What is the name of your organization?</label>
     <input type="text" class="form-control focus" name="OrgName"
            placeholder="Organization Name" autocomplete="off" required
            ng-model="data.organization.Name">
@@ -13,47 +14,67 @@
 <div class="form-group"
      ng-class="{'has-error': data.organization.Description.$invalid
         && data.organization.Description.$dirty}">
+    <label for="OrgDescription">Please give a brief description of your organization (50 to 300 characters)</label>
     <textarea class="form-control" rows="5" name="OrgDescription"
              placeholder="Organization Description" autocomplete="off" required
-             ng-model="data.organization.Description"></textarea>
+             ng-model="data.organization.Description" ng-maxlength="300" ng-minlength="50"></textarea>
     <span class="has-error control-label" ng-show="
         data.organization.Description.$invalid && data.organization.Description.$dirty">
       Organization Description is required.
     </span>
 </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgAddress"
-           placeholder="Organization Street Address" autocomplete="off"
-           ng-model="data.organization.location.Address">
-</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Please provide your organization's primary office address.</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="OrgAddress">What is the street address?</label>
+            <input type="text" class="form-control" name="OrgAddress"
+                   placeholder="Organization Street Address" autocomplete="off"
+                   ng-model="data.organization.location.Address">
+        </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgCity"
-           placeholder="Organization City" autocomplete="on"
-           ng-model="data.organization.location.City">
-</div>
+        <div class="form-group">
+            <label for="OrgCity">What is the city?</label>
+            <input type="text" class="form-control" name="OrgCity"
+                   placeholder="Organization City" autocomplete="on"
+                   ng-model="data.organization.location.City">
+        </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgRegion"
-           placeholder="Organization State/Province/Region" autocomplete="on"
-           ng-model="data.organization.location.Region">
-</div>
+        <div class="form-group">
+            <label for="OrgZip">What is the postal/zip code?</label>
+            <input type="text" class="form-control" name="OrgZip"
+                   placeholder="Organization Postal Code" autocomplete="on"
+                   ng-model="data.organization.location.Zip">
+        </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgCountry"
-           placeholder="Organization Country" autocomplete="on"
-           ng-model="data.organization.location.Country">
-</div>
+        <div class="form-group">
+            <label for="OrgRegion">What is the State/Province/Region?</label>
+            <input type="text" class="form-control" name="OrgRegion"
+                   placeholder="Organization State/Province/Region" autocomplete="on"
+                   ng-model="data.organization.location.Region">
+        </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgPhone"
-           placeholder="Organization Telephone Number" autocomplete="on"
-           ng-model="data.organization.Phone">
-</div>
+        <div class="form-group">
+            <label for="OrgCountry">What is the country?</label>
+            <input type="text" class="form-control" name="OrgCountry"
+                   placeholder="Organization Country" autocomplete="on"
+                   ng-model="data.organization.location.Country">
+        </div>
 
-<div class="form-group">
-    <input type="text" class="form-control" name="OrgWebsite"
-           placeholder="Organization Website" autocomplete="on"
-           ng-model="data.organization.URL">
+        <div class="form-group">
+            <label for="OrgPhone">What is the telephone number?</label>
+            <input type="text" class="form-control" name="OrgPhone"
+                   placeholder="Organization Telephone Number" autocomplete="on"
+                   ng-model="data.organization.Phone">
+        </div>
+
+        <div class="form-group">
+            <label for="OrgWebsite">What is the website address?</label>
+            <input type="url" class="form-control" name="OrgWebsite"
+                   placeholder="Organization Website" autocomplete="on"
+                   ng-model="data.organization.URL">
+        </div>
+
+    </div>
 </div>

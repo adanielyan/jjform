@@ -1,21 +1,38 @@
-<div class="form-group"
-     ng-class="{'has-error': data.project.TotalFunding.$invalid
-        && data.project.TotalFunding.$dirty}">
-    <input type="number" class="form-control" name="ProjectTotalFunding"
-           placeholder="Project Total Funding in USD" autocomplete="off" required
-           ng-model="data.project.TotalFunding">
-    <span class="has-error control-label" ng-show="
-        data.project.TotalFunding.$invalid && data.project.TotalFunding.$dirty">
-      Project Total Funding is required.
-    </span>
-</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Project Funding</div>
+    <div class="panel-body">
+        <div class="form-group"
+             ng-class="{'has-error': data.project.TotalFunding.$invalid
+                && data.project.TotalFunding.$dirty}">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="ProjectTotalFunding">What is the total funding for the life of the project? </label>
+                    <input type="number" class="form-control" name="ProjectTotalFunding"
+                           placeholder="Project Total Funding in USD" autocomplete="off" required
+                           ng-model="data.project.TotalFunding">
+                    <span class="has-error control-label" ng-show="
+                        data.project.TotalFunding.$invalid && data.project.TotalFunding.$dirty">
+                      Project Total Funding is required.
+                    </span>
+                </div>
+            </div>
+        </div>
 
-<div class="list-group">
-    <div class="form-group form-inline" ng-repeat="regionalDatum in data.regionalData">
-        <input type="text" class="form-control" name="Region"
-               ng-model="regionalDatum.Region" ng-disabled="true">
-        <input type="number" class="form-control" name="RegionFunding"
-               placeholder="Region Funding in USD"
-               ng-model="regionalDatum.Funding">
+        <div class="list-group">
+            <div class="form-group" ng-repeat="regionalDatum in data.regionalData">
+                <label>Please list each funder and their contribution in USD</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RegionFundingRegion{{$index}}"
+                               ng-model="regionalDatum.Region" ng-disabled="true">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="RegionFundingFunding{{$index}}"
+                               placeholder="Region Funding in USD"
+                               ng-model="regionalDatum.Funding">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,23 +1,157 @@
 <div class="form-group"
      ng-class="{'has-error': data.project.Name.$invalid
         && data.project.Name.$dirty}">
+    <label for="ProjectName">What is the name of your project?</label>
     <input type="text" class="form-control" name="ProjectName"
            placeholder="Project Name" autocomplete="off" required
            ng-model="data.project.Name">
     <span class="has-error control-label" ng-show="
         data.project.Name.$invalid && data.project.Name.$dirty">
-      Project Name is required.
+      Project Name field is required.
+    </span>
+</div>
+
+<div class="form-group"
+     ng-class="{'has-error': data.project.URL.$invalid}">
+    <label for="ProjectWebsite">Does the project have a website or web page? If so, please provide the link.</label>
+    <input type="url" class="form-control" name="ProjectWebsite"
+           placeholder="Project URL" autocomplete="off" required
+           ng-model="data.project.URL">
+    <span class="has-error control-label" ng-show="
+        data.project.URL.$invalid">
+      Website URL must be in a correct format.
     </span>
 </div>
 
 <div class="form-group"
      ng-class="{'has-error': data.project.Description.$invalid
         && data.project.Description.$dirty}">
+    <label for="ProjectDescription">Please give a brief project description (50 to 300 characters).</label>
     <textarea class="form-control" rows="5" name="ProjectDescription"
-           placeholder="Project Description" autocomplete="off" required
-           ng-model="data.project.Description"></textarea>
+              placeholder="Project Description" autocomplete="off" required
+              ng-model="data.project.Description" ng-maxlength="300" ng-minlength="50"></textarea>
     <span class="has-error control-label" ng-show="
         data.project.Description.$invalid && data.project.Description.$dirty">
-      Project Description is required.
+      Project Description field is required.
     </span>
+</div>
+
+<div class="form-group"
+     ng-class="{'has-error': data.project.Beneficiaries.$invalid
+        && data.project.Beneficiaries.$dirty}">
+    <label for="ProjectBeneficiaries">Please state who are the direct beneficiaries (women, girls, children, newborns, citizens, etc.) (Limit of 150 characters).</label>
+    <textarea class="form-control" rows="5" name="ProjectBeneficiaries"
+           placeholder="Project Beneficiaries" autocomplete="off" required
+           ng-model="data.project.Beneficiaries" ng-maxlength="150"></textarea>
+    <span class="has-error control-label" ng-show="
+        data.project.Beneficiaries.$invalid && data.project.Beneficiaries.$dirty">
+      Project Beneficiaries field is required.
+    </span>
+</div>
+
+<div class="row">
+    <div class="form-group date col-sm-4"
+         ng-class="{'has-error': data.project.StartDate.$invalid}">
+        <label for="ProjectStartDate">What is the project start date?</label>
+        <input type="date" class="form-control" name="ProjectStartDate"
+               placeholder="Project StartDate" autocomplete="off" required
+               ng-model="data.project.StartDate">
+        <span class="has-error control-label" ng-show="data.project.StartDate.$invalid">
+          Project Start Date must be in a correct format.
+        </span>
+    </div>
+
+    <div class="form-group date col-sm-4"
+         ng-class="{'has-error': data.project.EndDate.$invalid}">
+        <label for="ProjectEndDate">What is the project end date?</label>
+        <input type="date" class="form-control" name="ProjectEndDate"
+               placeholder="Project EndDate" autocomplete="off" required
+               ng-model="data.project.EndDate">
+        <span class="has-error control-label" ng-show="data.project.EndDate.$invalid">
+          Project End Date must be in a correct format.
+        </span>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Please provide the primary office address for your project.</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="ProjectAddress">What is the street address?</label>
+            <input type="text" class="form-control" name="ProjectAddress"
+                   placeholder="Project Primary Office Street Address" autocomplete="off"
+                   ng-model="data.project.location.Address">
+        </div>
+
+        <div class="form-group">
+            <label for="ProjectCity">What is the city?</label>
+            <input type="text" class="form-control" name="ProjectCity"
+                   placeholder="Project Primary Office City" autocomplete="on"
+                   ng-model="data.project.location.City">
+        </div>
+
+        <div class="form-group">
+            <label for="ProjectZip">What is the postal/zip code?</label>
+            <input type="text" class="form-control" name="OrgZip"
+                   placeholder="Project Postal Code" autocomplete="on"
+                   ng-model="data.project.location.Zip">
+        </div>
+
+        <div class="form-group">
+            <label for="ProjectRegion">What is the State/Province/Region?</label>
+            <input type="text" class="form-control" name="ProjectRegion"
+                   placeholder="Project Primary Office State/Province/Region" autocomplete="on"
+                   ng-model="data.project.location.Region">
+        </div>
+
+        <div class="form-group">
+            <label for="ProjectCountry">What is the country?</label>
+            <input type="text" class="form-control" name="ProjectCountry"
+                   placeholder="Project Primary Office Country" autocomplete="on"
+                   ng-model="data.project.location.Country">
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Please list contact information for two people that can be contacted for more information about this project.</div>
+    <div class="panel-body">
+        <div class="list-group">
+            <div class="form-group" ng-repeat="projectContact in data.projectContacts" ng-class="{'has-error': ProjectContactEmail{{$index+1}}.$invalid}">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="ProjectContactName{{$index+1}}">What is the Contact #{{$index+1}} Name?</label>
+                        <input type="text" class="form-control" name="ProjectContactName{{$index+1}}"
+                               placeholder="Project Contact #{{$index+1}} Name" autocomplete="off"
+                               ng-model="projectContact.Name">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProjectContactTitle{{$index+1}}">What is the Contact #{{$index+1}} Title?</label>
+                        <input type="text" class="form-control" name="ProjectContactTitle{{$index+1}}"
+                               placeholder="Project Contact #{{$index+1}} Title" autocomplete="off"
+                               ng-model="projectContact.contact.Title">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProjectContactEmail{{$index+1}}">What is the Contact #{{$index+1}} Email?</label>
+                        <input type="email" class="form-control" name="ProjectContactEmail{{$index+1}}"
+                               placeholder="Project Contact #{{$index+1}} Email" autocomplete="off"
+                               ng-model="projectContact.contact.Email">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProjectContactPhone{{$index+1}}">What is the Contact #{{$index+1}} Phone?</label>
+                        <input type="text" class="form-control" name="ProjectContactPhone{{$index+1}}"
+                               placeholder="Project Contact #{{$index+1}} Phone" autocomplete="off"
+                               ng-model="projectContact.contact.Phone">
+                    </div>
+
+                    <div class="col-md-12">
+                        <span class="has-error control-label" ng-show="ProjectContactEmail{{$index+1}}.$invalid">
+                            Project Contact Email is invalid.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

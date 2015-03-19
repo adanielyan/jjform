@@ -10,6 +10,7 @@ angular
                     delete $scope.data.project;
                     delete $scope.data.regionalData;
                     delete $scope.data.organization;
+                    delete $scope.data.projectContacts;
                     //console.log($state);
                     $scope.initProject();
                 }
@@ -206,8 +207,9 @@ angular
                 }
                 else {
                     $scope.data.project = $scope.data.project || {};
-                    $scope.data.regionalData = $scope.data.regionalData || [{}];
+                    $scope.data.regionalData = $scope.data.regionalData || [];
                     $scope.data.organization = $scope.data.organization || {};
+                    $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
                     //$scope.data.regionalData[0].contact = $scope.data.regionalData[0].contact || {};
                     //$scope.data.regionalData[0].locations = $scope.data.regionalData[0].locations || [];
                 }

@@ -28,12 +28,6 @@
     "URL": {
       "type": "string"
     },
-    "Beneficiaries": {
-      "type": "string"
-    },
-    "StartDate": {
-      "type": "date"
-    },
     "EndDate": {
       "type": "date"
     },
@@ -47,6 +41,12 @@
       "type": [
         "string"
       ]
+    },
+    "Beneficiaries": {
+      "type": "string"
+    },
+    "StartDate": {
+      "type": "date"
     }
   },
   "validations": [],
