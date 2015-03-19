@@ -155,3 +155,23 @@
         </div>
     </div>
 </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Implementing Partners</div>
+    <div class="panel-body">
+        <p>
+            Are there other implementing partners on this grant/contract? If so, please list.
+        </p>
+        <div class="list-group">
+            <div class="form-group form-inline" ng-repeat="implementingPartner in data.project.implementingPartners">
+                <input type="text" class="form-control" name="implementingPartner{{$index+1}}"
+                       placeholder="Implementing Partner" autocomplete="off"
+                       ng-model="implementingPartner">
+                <button class="btn btn-danger" type="button" ng-click="removeProjectImplementingPartner($index)">Remove Implementing Partner <span class="glyphicon glyphicon-trash"></span></button>
+            </div>
+
+            <label for="addImplementingPartner" ng-hide="data.project.implementingPartners.length > 0">To add an implementing Partner please click on <em>Add Implementing Partner</em> button below</label><br>
+            <button class="btn btn-default" type="button" ng-click="addProjectImplementingPartner($event)" name="addImplementingPartner">Add Implementing Partner</button>
+        </div>
+    </div>
+</div>

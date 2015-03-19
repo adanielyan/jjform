@@ -37,16 +37,16 @@
     "GovFunding": {
       "type": "number"
     },
-    "ImplementingPartners": {
-      "type": [
-        "string"
-      ]
-    },
     "Beneficiaries": {
       "type": "string"
     },
     "StartDate": {
       "type": "date"
+    },
+    "ImplementingPartners": {
+      "type": [
+        "string"
+      ]
     }
   },
   "validations": [],

@@ -171,6 +171,20 @@ angular
                     });
             };
 
+            $scope.addProjectImplementingPartner = function($event) {
+                if($scope.data.project.implementingPartners === undefined) {
+                    $scope.data.project.implementingPartners = [""];
+                }
+                else {
+                    $scope.data.project.implementingPartners.push("");
+                }
+                //$event.preventDefault();
+            };
+
+            $scope.removeProjectImplementingPartner = function(index) {
+                $scope.data.project.implementingPartners.splice(index, 1);
+            };
+
             $scope.getProjectRegion = function(regionIndex) {
                 return $scope.data.regionalData[regionIndex].Region;
             };
@@ -207,6 +221,7 @@ angular
                 }
                 else {
                     $scope.data.project = $scope.data.project || {};
+                    $scope.data.project.ImplementingPartners = $scope.data.project.ImplementingPartners || [];
                     $scope.data.regionalData = $scope.data.regionalData || [];
                     $scope.data.organization = $scope.data.organization || {};
                     $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
