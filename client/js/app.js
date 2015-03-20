@@ -9,7 +9,7 @@ angular
                 abstract: true,
                 url: '/project',
                 templateUrl: 'views/project.html',
-                controller: 'ProjectController'
+                controller: 'FormController'
             })
             .state('project.new', {
                 url: '/new',

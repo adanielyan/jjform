@@ -4,45 +4,62 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{regionalDatum.Region || "New Region"}}</div>
             <div class="panel-body">
-                <div class="form-group" ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="RegionLocationName[regionLocation][locationIndex]"
-                               placeholder="Activity Location Name" autocomplete="off"
-                               ng-model="regionLocation.Name">
+                <p>Please list the following information for project offices and activity locations for this region.
+                    Please provide as much information related to street address, village name, postal code, or GIS coordinates as possible.
+                    Please list as many as possible for the region.</p>
+                <div ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations" class="list-group">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="RegionLocationIsOffice_{{regionIndex+1}}_{{locationIndex+1}}">Is this a regional office location?</label>
+                                        <select class="form-control" ng-model="regionLocation.IsOffice" ng-options="x.value as x.label for x in [{value: true, label: 'Yes'}, {value: false, label: 'No'}]"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="RegionLocationName_{{regionIndex+1}}_{{locationIndex+1}}">What is the name of location?</label>
+                                <input type="text" class="form-control" name="RegionLocationName_{{regionIndex+1}}_{{locationIndex+1}}"
+                                       placeholder="Activity Location Name" autocomplete="off"
+                                       ng-model="regionLocation.Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}"
+                                       placeholder="Activity Location Country" autocomplete="off" required
+                                       ng-model="regionLocation.Country">
+                            </div>
+                            <span class="has-error control-label" ng-show="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}.$invalid && RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}.$dirty">
+                                Location Country is required.
+                            </span>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="RegionLocationAddress_{{regionIndex+1}}_{{locationIndex+1}}"
+                                       placeholder="Activity Location Street Address" autocomplete="off"
+                                       ng-model="regionLocation.Address">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="RegionLocationCity[regionLocation][locationIndex]"
+                                       placeholder="Activity Location City" autocomplete="on" required
+                                       ng-model="regionLocation.City">
+                            </div>
+                            <span class="has-error control-label" ng-show="RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$invalid && RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$dirty">
+                                Location City is required.
+                            </span>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="OrgRegion"
+                                       ng-model="regionalDatum.Region"
+                                       ng-disabled="true">
+                            </div>
+
+                            <button class="btn btn-danger" type="button" ng-click="removeRegionalDataLocation(regionIndex, locationIndex)">Remove Location <span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="RegionLocationCountry[regionLocation][locationIndex]"
-                               placeholder="Activity Location Country" autocomplete="off" required
-                               ng-model="regionLocation.Country">
-                    </div>
-                    <span class="has-error control-label" ng-show="RegionLocationCountry[regionLocation][locationIndex].$invalid && RegionLocationCountry[regionLocation][locationIndex].$dirty">
-                        Location Country is required.
-                    </span>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="RegionLocationAddress[regionLocation][locationIndex]"
-                               placeholder="Activity Location Street Address" autocomplete="off"
-                               ng-model="regionLocation.Address">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="RegionLocationCity[regionLocation][locationIndex]"
-                               placeholder="Activity Location City" autocomplete="on" required
-                               ng-model="regionLocation.City">
-                    </div>
-                    <span class="has-error control-label" ng-show="RegionLocationCity[regionLocation][locationIndex].$invalid && RegionLocationCity[regionLocation][locationIndex].$dirty">
-                        Location City is required.
-                    </span>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="OrgRegion"
-                               ng-model="regionalDatum.Region"
-                               ng-disabled="true">
-                    </div>
-
-                    <button class="btn btn-danger" type="button" ng-click="removeRegionalDataLocation(regionIndex, locationIndex)">Remove Location <span class="glyphicon glyphicon-trash"></span></button>
-
                 </div>
                 <button class="btn btn-default" type="button" ng-click="addRegionalDataLocation(regionIndex, $event)">Add Location</button>
             </div>

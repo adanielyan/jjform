@@ -73,7 +73,8 @@
             <label for="OrgWebsite">What is the website address?</label>
             <input type="url" class="form-control" name="OrgWebsite"
                    placeholder="Organization Website" autocomplete="on"
-                   ng-model="data.organization.URL">
+                   ng-model="data.organization.URL"
+                   ng-class="{'has-error': projectForm.OrgWebsite.$invalid}">
         </div>
 
     </div>

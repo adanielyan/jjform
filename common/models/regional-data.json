@@ -17,11 +17,6 @@
     "Funding": {
       "type": "number"
     },
-    "Impacts": {
-      "type": [
-        "string"
-      ]
-    },
     "InfantBeneficiaries": {
       "type": "number"
     },
@@ -42,6 +37,11 @@
     },
     "modified": {
       "type": "date"
+    },
+    "Impacts": {
+      "type": [
+        "object"
+      ]
     }
   },
   "validations": [],

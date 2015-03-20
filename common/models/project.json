@@ -45,7 +45,7 @@
     },
     "ImplementingPartners": {
       "type": [
-        "string"
+        "object"
       ]
     }
   },

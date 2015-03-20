@@ -1,7 +1,7 @@
 angular
     .module('app')
-    .controller('ProjectController', ['$rootScope', '$scope', '$state', 'Organization', 'Project', 'RegionalData', 'Contact', 'Location',
-        function($rootScope, $scope, $state, Organization, Project, RegionalData, Contact, Location) {
+    .controller('FormController', ['$rootScope', '$scope', '$state', 'Organization', 'Project', 'RegionalData', 'Contact', 'Location', 'Sector', 'SubSector',
+        function($rootScope, $scope, $state, Organization, Project, RegionalData, Contact, Location, Sector, SubSector) {
 
             $scope.data = $scope.data || {};
 
@@ -11,10 +11,48 @@ angular
                     delete $scope.data.regionalData;
                     delete $scope.data.organization;
                     delete $scope.data.projectContacts;
+                    delete $scope.data.projectSectors;
+                    delete $scope.data.projectSubSectors;
                     //console.log($state);
                     $scope.initProject();
                 }
             });
+
+            $scope.getAllSectors = function() {
+                Sector
+                    .find()
+                    .$promise
+                    .then(function(sectors) {
+                        $scope.data.sectors = sectors;
+                    });
+            };
+
+            $scope.getSubSectorBySector = function(sector) {
+                Sector
+                    .subSectors(sector)
+                    .$promise
+                    .then(function(sectors) {
+                        $scope.data.subSectors = sectors;
+                    });
+            };
+
+            $scope.getProjectSectors = function(project) {
+                Project
+                    .sectors(project)
+                    .$promise
+                    .then(function(sectors) {
+                        $scope.data.projectSectors = sectors;
+                    });
+            };
+
+            $scope.getProjectSubSectors = function(project) {
+                Project
+                    .subSectors(project)
+                    .$promise
+                    .then(function(subSectors) {
+                        $scope.data.projectSubSectors = subSectors;
+                    });
+            };
 
             $scope.getProjects = function() {
                 Project
@@ -31,6 +69,13 @@ angular
                     .$promise
                     .then(function(result) {
                         $scope.data.project = result;
+                        if($scope.data.project.StartDate !== undefined) {
+                            $scope.data.project.StartDate = new Date($scope.data.project.StartDate);
+                        }
+
+                        if($scope.data.project.EndDate !== undefined) {
+                            $scope.data.project.EndDate = new Date($scope.data.project.EndDate);
+                        }
                         callback(result);
                     });
             };
@@ -45,13 +90,14 @@ angular
                         Location
                             .upsert($scope.data.organization.location)
                             .$promise
-                            .then(function () {
-                                console.log("Organization Location saved.");
+                            .then(function (location) {
+                                console.log("Organization Location " + location.Name + " saved.");
                             });
                         Project
                             .upsert($scope.data.project)
                             .$promise
                             .then(function (project) {
+                                console.log("Project " + project.Name + " saved.");
                                 $scope.data.project = project;
                                 for (var i = 0; i < $scope.data.regionalData.length; i++) {
                                     (function (i) {
@@ -161,22 +207,27 @@ angular
                     .$promise
                     .then(function() {
                         console.log("Contact for region " + $scope.data.regionalData[index].Name + " is destroyed.");
-                        Project.regionalData
-                            .destroyById({id: $scope.data.regionalData[index].projectId, fk: $scope.data.regionalData[index].id})
+                        RegionalData.locations
+                            .destroyAll({id: $scope.data.regionalData[index].id})
                             .$promise
                             .then(function() {
-                                console.log("Region " + $scope.data.regionalData[index].Name + " is destroyed.");
-                                $scope.data.regionalData.splice(index, 1);
+                                Project.regionalData
+                                    .destroyById({id: $scope.data.regionalData[index].projectId, fk: $scope.data.regionalData[index].id})
+                                    .$promise
+                                    .then(function() {
+                                        console.log("Region " + $scope.data.regionalData[index].Name + " is destroyed.");
+                                        $scope.data.regionalData.splice(index, 1);
+                                    });
                             });
                     });
             };
 
             $scope.addProjectImplementingPartner = function($event) {
                 if($scope.data.project.implementingPartners === undefined) {
-                    $scope.data.project.implementingPartners = [""];
+                    $scope.data.project.implementingPartners = [{}];
                 }
                 else {
-                    $scope.data.project.implementingPartners.push("");
+                    $scope.data.project.implementingPartners.push({});
                 }
                 //$event.preventDefault();
             };
@@ -213,16 +264,24 @@ angular
             //console.log($state.params);
 
             $scope.initProject = function() {
+
+                $scope.data.sectors = $scope.data.sectors || [];
+                $scope.data.subSectors = $scope.data.subSectors || [];
+
                 if ($state.params.projectId !== undefined) {
                     $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId}, function(project) {
                         $scope.data.organization = $scope.data.organization || $scope.getOrganizationById({id: project.organizationId});
                     });
                     $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
+                    $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
                 }
                 else {
+                    console.log("NEW");
                     $scope.data.project = $scope.data.project || {};
-                    $scope.data.project.ImplementingPartners = $scope.data.project.ImplementingPartners || [];
+                    $scope.data.project.implementingPartners = $scope.data.project.implementingPartners || [];
                     $scope.data.regionalData = $scope.data.regionalData || [];
+                    $scope.data.projectSectors = $scope.data.projectSectors || [];
+                    $scope.data.projectSubSectors = $scope.data.projectSubSectors || [];
                     $scope.data.organization = $scope.data.organization || {};
                     $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
                     //$scope.data.regionalData[0].contact = $scope.data.regionalData[0].contact || {};

@@ -2,17 +2,32 @@
     <div class="panel-heading">Project Funding</div>
     <div class="panel-body">
         <div class="form-group"
-             ng-class="{'has-error': data.project.TotalFunding.$invalid
-                && data.project.TotalFunding.$dirty}">
+             ng-class="{'has-error': projectForm.ProjectTotalFunding.$invalid
+                && projectForm.ProjectTotalFunding.$dirty}">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="ProjectTotalFunding">What is the total funding for the life of the project? </label>
+                    <label class="control-label" for="ProjectTotalFunding">What is the total funding for the life of the project? </label>
                     <input type="number" class="form-control" name="ProjectTotalFunding"
                            placeholder="Project Total Funding in USD" autocomplete="off" required
                            ng-model="data.project.TotalFunding">
-                    <span class="has-error control-label" ng-show="
-                        data.project.TotalFunding.$invalid && data.project.TotalFunding.$dirty">
+                    <span class="has-error control-label" ng-show="projectForm.ProjectTotalFunding.$invalid && projectForm.ProjectTotalFunding.$dirty">
                       Project Total Funding is required.
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': projectForm.RegionGovFunding.$invalid
+                && projectForm.RegionGovFunding.$dirty}">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label" for="RegionGovFunding">If applicable, please list any national, regional or other government funding for this project in USD.</label>
+                    <input type="number" class="form-control" name="RegionGovFunding"
+                           placeholder="Regional or Other Government Funding in USD" autocomplete="off"
+                           ng-model="data.project.GovFunding">
+                    <span class="has-error control-label" ng-show="projectForm.RegionGovFunding.$invalid  && projectForm.RegionGovFunding.$dirty">
+                      Regional or Other Government Funding must be a valid number.
                     </span>
                 </div>
             </div>
@@ -20,7 +35,7 @@
 
         <div class="list-group">
             <div class="form-group" ng-repeat="regionalDatum in data.regionalData">
-                <label>Please list each funder and their contribution in USD</label>
+                <label class="control-label">Please list each funder and their contribution in USD</label>
                 <div class="row">
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="RegionFundingRegion{{$index}}"
