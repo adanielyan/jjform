@@ -7,6 +7,13 @@
                 <p>Please list the following information for project offices and activity locations for this region.
                     Please provide as much information related to street address, village name, postal code, or GIS coordinates as possible.
                     Please list as many as possible for the region.</p>
+
+                <div class="form-group">
+                    <select ng-model="data.projectSubSectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.subSectors"></select>
+                </div>
+
+                <p>{{data.projectSubSectors}}</p>
+
                 <div ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations" class="list-group">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -61,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+                <label class="control-label">To add a location please click on <em>Add Location</em> button below</label><br>
                 <button class="btn btn-default" type="button" ng-click="addRegionalDataLocation(regionIndex, $event)">Add Location</button>
             </div>
         </div>

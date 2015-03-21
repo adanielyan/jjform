@@ -5,6 +5,8 @@ angular
 
             $scope.data = $scope.data || {};
 
+            $scope.data.projectSubSectors = ["550c58900809b92099e01774", "550c58900809b92099e01777", "550c58900809b92099e01778"];
+
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
                     delete $scope.data.project;
@@ -24,6 +26,15 @@ angular
                     .$promise
                     .then(function(sectors) {
                         $scope.data.sectors = sectors;
+                    });
+            };
+
+            $scope.getAllSubSectors = function() {
+                SubSector
+                    .find()
+                    .$promise
+                    .then(function(subSectors) {
+                        $scope.data.subSectors = subSectors;
                     });
             };
 
@@ -182,7 +193,12 @@ angular
                     .findById(item)
                     .$promise
                     .then(function(result) {
-                        $scope.data.organization = result;
+                        if(result === []) {
+                            $scope.data.organization = {};
+                        }
+                        else {
+                            $scope.data.organization = result;
+                        }
                         Organization.location(result)
                             .$promise
                             .then(function(location) {
@@ -265,12 +281,18 @@ angular
 
             $scope.initProject = function() {
 
-                $scope.data.sectors = $scope.data.sectors || [];
-                $scope.data.subSectors = $scope.data.subSectors || [];
+                $scope.data.sectors = $scope.data.sectors || $scope.getAllSectors();
+                $scope.data.subSectors = $scope.data.subSectors || $scope.getAllSubSectors();
 
                 if ($state.params.projectId !== undefined) {
                     $scope.data.project = $scope.data.project || $scope.getProjectById({id: $state.params.projectId}, function(project) {
-                        $scope.data.organization = $scope.data.organization || $scope.getOrganizationById({id: project.organizationId});
+                        if(project.organizationId === undefined)
+                        {
+                            $scope.data.organization = {};
+                        }
+                        else {
+                            $scope.data.organization = $scope.data.organization || $scope.getOrganizationById({id: project.organizationId});
+                        }
                     });
                     $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
                     $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
