@@ -62,14 +62,12 @@
       "foreignKey": "regionalDataId"
     },
     "sectors": {
-      "type": "hasMany",
-      "model": "Sector",
-      "foreignKey": "regionalDataId"
+      "type": "hasAndBelongsToMany",
+      "model": "Sector"
     },
     "subSectors": {
-      "type": "hasMany",
-      "model": "SubSector",
-      "foreignKey": "regionalDataId"
+      "type": "hasAndBelongsToMany",
+      "model": "SubSector"
     }
   },
   "acls": [],

@@ -5,7 +5,7 @@ angular
 
             $scope.data = $scope.data || {};
 
-            $scope.data.projectSubSectors = ["550c58900809b92099e01774", "550c58900809b92099e01777", "550c58900809b92099e01778"];
+            //$scope.data.projectSubSectors = ["550c58900809b92099e01774", "550c58900809b92099e01777", "550c58900809b92099e01778"];
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 if((toState.name != fromState.name) || (toParams.projectId != $scope.data.project.id)) {
@@ -13,8 +13,8 @@ angular
                     delete $scope.data.regionalData;
                     delete $scope.data.organization;
                     delete $scope.data.projectContacts;
-                    delete $scope.data.projectSectors;
-                    delete $scope.data.projectSubSectors;
+                    //delete $scope.data.projectSectors;
+                    //delete $scope.data.projectSubSectors;
                     //console.log($state);
                     $scope.initProject();
                 }
@@ -44,24 +44,6 @@ angular
                     .$promise
                     .then(function(sectors) {
                         $scope.data.subSectors = sectors;
-                    });
-            };
-
-            $scope.getProjectSectors = function(project) {
-                Project
-                    .sectors(project)
-                    .$promise
-                    .then(function(sectors) {
-                        $scope.data.projectSectors = sectors;
-                    });
-            };
-
-            $scope.getProjectSubSectors = function(project) {
-                Project
-                    .subSectors(project)
-                    .$promise
-                    .then(function(subSectors) {
-                        $scope.data.projectSubSectors = subSectors;
                     });
             };
 
@@ -122,7 +104,7 @@ angular
                                                     .upsert($scope.data.regionalData[i].contact)
                                                     .$promise
                                                     .then(function (contact) {
-                                                        console.log("Contact " + contact.Name + "created successfully.");
+                                                        console.log("Contact " + contact.Name + " created successfully.");
                                                         if (i == $scope.data.regionalData.length - 1) {
                                                             $state.transitionTo('project.details', {projectId: project.id}, {
                                                                 location: true,
@@ -142,6 +124,19 @@ angular
                                                                 console.log("Location " + location.Name + "created successfully.");
                                                             });
                                                     })(j);
+                                                }
+
+                                                for(var k = 0; k < $scope.data.regionalData[i].sectors.length; k++) {
+                                                    RegionalData.sectors
+                                                        .link({id: $scope.data.regionalData[i].sectors[k]})
+                                                        .$promise
+                                                        .then(function (result) {
+                                                            console.log(result);
+                                                        },
+                                                        function(err) {
+                                                            if (err) console.log("Error adding sector " + $scope.data.regionalData[i].sectors[k] + " to region " + $scope.data.regionalData[i].Name);
+                                                            else console.log("Sector " + $scope.data.regionalData[i].sectors[k] + " successfully added to region " + $scope.data.regionalData[i].Name);
+                                                    });
                                                 }
                                             });
                                     })(i);
@@ -184,6 +179,24 @@ angular
                                     });
                             })(i);
                         }
+                        for(var i=0; i < $scope.data.regionalData.length; i++) {
+                            (function(i) {
+                                RegionalData.sectors($scope.data.regionalData[i])
+                                    .$promise
+                                    .then(function(sectors) {
+                                        $scope.data.regionalData[i].sectors = sectors || [{}];
+                                    });
+                            })(i);
+                        }
+                        for(var i=0; i < $scope.data.regionalData.length; i++) {
+                            (function(i) {
+                                RegionalData.subSectors($scope.data.regionalData[i])
+                                    .$promise
+                                    .then(function(subSectors) {
+                                        $scope.data.regionalData[i].subSectors = subSectors || [{}];
+                                    });
+                            })(i);
+                        }
                         //console.log($scope.data.regionalData);
                     });
             };
@@ -199,10 +212,14 @@ angular
                         else {
                             $scope.data.organization = result;
                         }
-                        Organization.location(result)
+                        Organization.location({id: result.id})
                             .$promise
                             .then(function(location) {
-                                $scope.data.organization.location = location || [{}];
+                                $scope.data.organization.location = location || {};
+                            },
+                            function(error) {
+                                console.log(error.data.error.message);
+                                $scope.data.organization.location = {};
                             });
                     });
             };

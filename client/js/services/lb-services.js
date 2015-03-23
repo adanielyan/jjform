@@ -3401,6 +3401,24 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.sectors.link() instead.
+        "prototype$__link__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.unlink() instead.
+        "prototype$__unlink__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.exists() instead.
+        "prototype$__exists__sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "HEAD"
+        },
+
         // INTERNAL. Use RegionalData.subSectors.findById() instead.
         "prototype$__findById__subSectors": {
           url: urlBase + "/RegionalData/:id/subSectors/:fk",
@@ -3417,6 +3435,24 @@ module.factory(
         "prototype$__updateById__subSectors": {
           url: urlBase + "/RegionalData/:id/subSectors/:fk",
           method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.link() instead.
+        "prototype$__link__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.unlink() instead.
+        "prototype$__unlink__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.exists() instead.
+        "prototype$__exists__subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "HEAD"
         },
 
         // INTERNAL. Use RegionalData.locations() instead.
@@ -3881,6 +3917,128 @@ module.factory(
         // INTERNAL. Use Location.regionalData() instead.
         "::get::Location::regionalData": {
           url: urlBase + "/Locations/:id/regionalData",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Sector.regionalData.findById() instead.
+        "::findById::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Sector.regionalData.destroyById() instead.
+        "::destroyById::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.updateById() instead.
+        "::updateById::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Sector.regionalData.link() instead.
+        "::link::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Sector.regionalData.unlink() instead.
+        "::unlink::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.exists() instead.
+        "::exists::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Sector.regionalData() instead.
+        "::get::Sector::regionalData": {
+          isArray: true,
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Sector.regionalData.create() instead.
+        "::create::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Sector.regionalData.destroyAll() instead.
+        "::delete::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.count() instead.
+        "::count::Sector::regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.findById() instead.
+        "::findById::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.destroyById() instead.
+        "::destroyById::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.updateById() instead.
+        "::updateById::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.link() instead.
+        "::link::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.unlink() instead.
+        "::unlink::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.exists() instead.
+        "::exists::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use SubSector.regionalData() instead.
+        "::get::SubSector::regionalData": {
+          isArray: true,
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.create() instead.
+        "::create::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "POST"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.destroyAll() instead.
+        "::delete::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.count() instead.
+        "::count::SubSector::regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/count",
           method: "GET"
         },
       }
@@ -4665,6 +4823,42 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name lbServices.RegionalData.sectors#exists
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Check the existence of sectors relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors.exists = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::exists::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
          * @name lbServices.RegionalData.sectors#findById
          * @methodOf lbServices.RegionalData.sectors
          *
@@ -4696,6 +4890,79 @@ module.factory(
         R.sectors.findById = function() {
           var TargetResource = $injector.get("Sector");
           var action = TargetResource["::findById::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#link
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Add a related item by id for sectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Sector` object.)
+         * </em>
+         */
+        R.sectors.link = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::link::RegionalData::sectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.sectors#unlink
+         * @methodOf lbServices.RegionalData.sectors
+         *
+         * @description
+         *
+         * Remove the sectors relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for sectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.sectors.unlink = function() {
+          var TargetResource = $injector.get("Sector");
+          var action = TargetResource["::unlink::RegionalData::sectors"];
           return action.apply(R, arguments);
         };
 
@@ -4928,6 +5195,42 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#exists
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Check the existence of subSectors relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors.exists = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::exists::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
          * @name lbServices.RegionalData.subSectors#findById
          * @methodOf lbServices.RegionalData.subSectors
          *
@@ -4959,6 +5262,79 @@ module.factory(
         R.subSectors.findById = function() {
           var TargetResource = $injector.get("SubSector");
           var action = TargetResource["::findById::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#link
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Add a related item by id for subSectors
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `SubSector` object.)
+         * </em>
+         */
+        R.subSectors.link = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::link::RegionalData::subSectors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.RegionalData.subSectors#unlink
+         * @methodOf lbServices.RegionalData.subSectors
+         *
+         * @description
+         *
+         * Remove the subSectors relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for subSectors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.subSectors.unlink = function() {
+          var TargetResource = $injector.get("SubSector");
+          var action = TargetResource["::unlink::RegionalData::subSectors"];
           return action.apply(R, arguments);
         };
 
@@ -8958,6 +9334,42 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Sector.regionalData.findById() instead.
+        "prototype$__findById__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Sector.regionalData.destroyById() instead.
+        "prototype$__destroyById__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.updateById() instead.
+        "prototype$__updateById__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Sector.regionalData.link() instead.
+        "prototype$__link__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Sector.regionalData.unlink() instead.
+        "prototype$__unlink__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.exists() instead.
+        "prototype$__exists__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/rel/:fk",
+          method: "HEAD"
+        },
+
         // INTERNAL. Use Sector.subSectors.findById() instead.
         "prototype$__findById__subSectors": {
           url: urlBase + "/Sectors/:id/subSectors/:fk",
@@ -8974,6 +9386,31 @@ module.factory(
         "prototype$__updateById__subSectors": {
           url: urlBase + "/Sectors/:id/subSectors/:fk",
           method: "PUT"
+        },
+
+        // INTERNAL. Use Sector.regionalData() instead.
+        "prototype$__get__regionalData": {
+          isArray: true,
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Sector.regionalData.create() instead.
+        "prototype$__create__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Sector.regionalData.destroyAll() instead.
+        "prototype$__delete__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Sector.regionalData.count() instead.
+        "prototype$__count__regionalData": {
+          url: urlBase + "/Sectors/:id/regionalData/count",
+          method: "GET"
         },
 
         // INTERNAL. Use Sector.subSectors() instead.
@@ -9360,6 +9797,24 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.sectors.link() instead.
+        "::link::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.unlink() instead.
+        "::unlink::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.sectors.exists() instead.
+        "::exists::RegionalData::sectors": {
+          url: urlBase + "/RegionalData/:id/sectors/rel/:fk",
+          method: "HEAD"
+        },
+
         // INTERNAL. Use RegionalData.sectors() instead.
         "::get::RegionalData::sectors": {
           isArray: true,
@@ -9526,6 +9981,378 @@ module.factory(
     */
     R.modelName = "Sector";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Sector.regionalData
+     * @header lbServices.Sector.regionalData
+     * @object
+     * @description
+     *
+     * The object `Sector.regionalData` groups methods
+     * manipulating `RegionalData` instances related to `Sector`.
+     *
+     * Call {@link lbServices.Sector#regionalData Sector.regionalData()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector#regionalData
+         * @methodOf lbServices.Sector
+         *
+         * @description
+         *
+         * Queries regionalData of Sector.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::get::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#count
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Counts regionalData of Sector.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.regionalData.count = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::count::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#create
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Creates a new instance in regionalData of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.create = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::create::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#destroyAll
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Deletes all regionalData of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.destroyAll = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::delete::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#destroyById
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Delete a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.destroyById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::destroyById::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#exists
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Check the existence of regionalData relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.exists = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::exists::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#findById
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Find a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.findById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::findById::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#link
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Add a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.link = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::link::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#unlink
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Remove the regionalData relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.unlink = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::unlink::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Sector.regionalData#updateById
+         * @methodOf lbServices.Sector.regionalData
+         *
+         * @description
+         *
+         * Update a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.updateById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::updateById::Sector::regionalData"];
+          return action.apply(R, arguments);
+        };
     /**
      * @ngdoc object
      * @name lbServices.Sector.subSectors
@@ -9821,6 +10648,67 @@ module.factory(
         // INTERNAL. Use SubSector.sector() instead.
         "prototype$__get__sector": {
           url: urlBase + "/SubSectors/:id/sector",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.findById() instead.
+        "prototype$__findById__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.destroyById() instead.
+        "prototype$__destroyById__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.updateById() instead.
+        "prototype$__updateById__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.link() instead.
+        "prototype$__link__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.unlink() instead.
+        "prototype$__unlink__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.exists() instead.
+        "prototype$__exists__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use SubSector.regionalData() instead.
+        "prototype$__get__regionalData": {
+          isArray: true,
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "GET"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.create() instead.
+        "prototype$__create__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "POST"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.destroyAll() instead.
+        "prototype$__delete__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use SubSector.regionalData.count() instead.
+        "prototype$__count__regionalData": {
+          url: urlBase + "/SubSectors/:id/regionalData/count",
           method: "GET"
         },
 
@@ -10183,6 +11071,24 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use RegionalData.subSectors.link() instead.
+        "::link::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.unlink() instead.
+        "::unlink::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use RegionalData.subSectors.exists() instead.
+        "::exists::RegionalData::subSectors": {
+          url: urlBase + "/RegionalData/:id/subSectors/rel/:fk",
+          method: "HEAD"
+        },
+
         // INTERNAL. Use RegionalData.subSectors() instead.
         "::get::RegionalData::subSectors": {
           isArray: true,
@@ -10420,6 +11326,378 @@ module.factory(
         R.sector = function() {
           var TargetResource = $injector.get("Sector");
           var action = TargetResource["::get::SubSector::sector"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.SubSector.regionalData
+     * @header lbServices.SubSector.regionalData
+     * @object
+     * @description
+     *
+     * The object `SubSector.regionalData` groups methods
+     * manipulating `RegionalData` instances related to `SubSector`.
+     *
+     * Call {@link lbServices.SubSector#regionalData SubSector.regionalData()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector#regionalData
+         * @methodOf lbServices.SubSector
+         *
+         * @description
+         *
+         * Queries regionalData of SubSector.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::get::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#count
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Counts regionalData of SubSector.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.regionalData.count = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::count::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#create
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Creates a new instance in regionalData of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.create = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::create::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#destroyAll
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Deletes all regionalData of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.destroyAll = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::delete::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#destroyById
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Delete a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.destroyById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::destroyById::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#exists
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Check the existence of regionalData relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.exists = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::exists::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#findById
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Find a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.findById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::findById::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#link
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Add a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.link = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::link::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#unlink
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Remove the regionalData relation to an item by id
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.regionalData.unlink = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::unlink::SubSector::regionalData"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.SubSector.regionalData#updateById
+         * @methodOf lbServices.SubSector.regionalData
+         *
+         * @description
+         *
+         * Update a related item by id for regionalData
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for regionalData
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `RegionalData` object.)
+         * </em>
+         */
+        R.regionalData.updateById = function() {
+          var TargetResource = $injector.get("RegionalData");
+          var action = TargetResource["::updateById::SubSector::regionalData"];
           return action.apply(R, arguments);
         };
 

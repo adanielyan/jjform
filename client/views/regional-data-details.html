@@ -8,11 +8,20 @@
                     Please provide as much information related to street address, village name, postal code, or GIS coordinates as possible.
                     Please list as many as possible for the region.</p>
 
-                <div class="form-group">
-                    <select ng-model="data.projectSubSectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.subSectors"></select>
+                <div class="form-inline">
+                    <div class="form-group form-inline">
+                        <select ng-model="regionalDatum.sectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.sectors"></select>
+                    </div>
+
+
+                    <div class="form-group" ng-repeat="subSector in regionalDatum.sectors">
+                        <select ng-model="regionalDatum.subSectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.subSectors"></select>
+                    </div>
                 </div>
 
-                <p>{{data.projectSubSectors}}</p>
+
+
+                <p>{{data.projectSectors}}</p>
 
                 <div ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations" class="list-group">
                     <div class="panel panel-default">

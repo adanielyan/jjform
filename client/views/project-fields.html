@@ -21,7 +21,7 @@
 </div>
 
 <div class="form-group"
-     ng-class="{'has-error': projectForm.ProjectDescription.$dirty}">
+     ng-class="{'has-error': projectForm.ProjectDescription.$invalid && projectForm.ProjectDescription.$touched}">
     <label class="control-label" for="ProjectDescription">Please give a brief project description (50 to 300 characters).</label>
     <textarea class="form-control" rows="5" name="ProjectDescription"
               placeholder="Project Description" autocomplete="off" required
@@ -32,7 +32,7 @@
 </div>
 
 <div class="form-group"
-     ng-class="{'has-error': projectForm.ProjectBeneficiaries.$dirty}">
+     ng-class="{'has-error': projectForm.ProjectBeneficiaries.$invalid && projectForm.ProjectBeneficiaries.$touched}">
     <label class="control-label" for="ProjectBeneficiaries">Please state who are the direct beneficiaries (women, girls, children, newborns, citizens, etc.) (Limit of 150 characters).</label>
     <textarea class="form-control" rows="5" name="ProjectBeneficiaries"
            placeholder="Project Beneficiaries" autocomplete="off" required
