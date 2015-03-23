@@ -34,8 +34,33 @@
         </div>
 
         <div class="list-group">
+            <label class="control-label">Please list each funder and their contribution in USD</label>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group" ng-repeat="contribution in data.contributions">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="FundingFunder{{$index}}"
+                                       placeholder="Funder Name"
+                                       ng-model="contribution.Funder.Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" name="FundingAmount{{$index}}"
+                                       placeholder="Region Funding in USD"
+                                       ng-model="contribution.Amount">
+                            </div>
+                            <button class="btn btn-danger" type="button" ng-click="removeProjectFunder($index)">Remove Funder <span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                    </div>
+                    <label class="control-label">To add a funder please click on <em>Add Funder</em> button below</label><br>
+                    <button class="btn btn-default" type="button" ng-click="addProjectFunder($event)">Add Funder</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group">
             <div class="form-group" ng-repeat="regionalDatum in data.regionalData">
-                <label class="control-label">Please list each funder and their contribution in USD</label>
+                <label class="control-label">If applicable, please provide a breakdown of budgeted funding for each sub-national region in USD.</label>
                 <div class="row">
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="RegionFundingRegion{{$index}}"

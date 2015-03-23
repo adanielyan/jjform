@@ -1,7 +1,8 @@
 angular
     .module('app')
-    .controller('FormController', ['$rootScope', '$scope', '$state', 'Organization', 'Project', 'RegionalData', 'Contact', 'Location', 'Sector', 'SubSector',
-        function($rootScope, $scope, $state, Organization, Project, RegionalData, Contact, Location, Sector, SubSector) {
+    .controller('FormController', ['$rootScope', '$scope', '$state', 'Organization', 'Project', 'RegionalData',
+        'Contact', 'Location', 'Sector', 'SubSector', 'Funder', 'Contribution',
+        function($rootScope, $scope, $state, Organization, Project, RegionalData, Contact, Location, Sector, SubSector, Funder, Contribution) {
 
             $scope.data = $scope.data || {};
 
@@ -13,6 +14,7 @@ angular
                     delete $scope.data.regionalData;
                     delete $scope.data.organization;
                     delete $scope.data.projectContacts;
+                    delete $scope.data.contributions;
                     //delete $scope.data.projectSectors;
                     //delete $scope.data.projectSubSectors;
                     //console.log($state);
@@ -92,6 +94,69 @@ angular
                             .then(function (project) {
                                 console.log("Project " + project.Name + " saved.");
                                 $scope.data.project = project;
+                                //Saving Funders and Contributions
+
+                                Contribution
+                                    .find({projectId: project.id})
+                                    .$promise
+                                    .then(function(contributions) {
+                                        var iteration = 0;
+                                        for (var i = 0; i < contributions.length; i++) {
+                                            (function (i) {
+                                                Contribution
+                                                    .destroyById(contributions[i])
+                                                    .$promise
+                                                    .then(function() {
+                                                        iteration++;
+                                                        console.log("Contribution " + contributions[i].id + " has been deleted");
+                                                        if(iteration === contributions.length) {
+                                                            for (var i = 0; i < $scope.data.contributions.length; i++) {
+                                                                (function (i) {
+                                                                    Funder
+                                                                        .find({Name: $scope.data.contributions[i].Funder})
+                                                                        .$promise
+                                                                        .then(function(funder) {
+                                                                            console.log(funder);
+                                                                            if(funder.length === 0) {
+                                                                                Funder
+                                                                                    .create($scope.data.contributions[i].Funder)
+                                                                                    .$promise
+                                                                                    .then(function(newFunder) {
+                                                                                        console.log("Funder " + newFunder.id + " has been created.");
+                                                                                        Contribution
+                                                                                            .upsert({projectId: project.id, funderId: newFunder.id, Amount: $scope.data.contributions[i].Amount})
+                                                                                            .$promise
+                                                                                            .then(function (contribution) {
+                                                                                                console.log("Contribution " + contribution.id + " created.");
+                                                                                            });
+
+                                                                                    });
+                                                                            }
+                                                                            else {
+                                                                                Contribution
+                                                                                    .create({projectId: project.id, funderId: funder[0].id, Amount: $scope.data.contributions[i].Amount})
+                                                                                    .$promise
+                                                                                    .then(function (contribution) {
+                                                                                        console.log("Contribution " + contribution.id + " created.");
+                                                                                    });
+
+                                                                            }
+                                                                        });
+                                                                })(i);
+                                                            }
+                                                        }
+                                                    },
+                                                    function(err) {
+                                                        console.log("Error deleting contribution " + contributions[i].id + ": " + err.data.error.message);
+                                                    });
+                                            })(i);
+                                        }
+                                    });
+
+
+
+
+                                //Saving Regions
                                 for (var i = 0; i < $scope.data.regionalData.length; i++) {
                                     (function (i) {
                                         $scope.data.regionalData[i]['projectId'] = project.id;
@@ -128,14 +193,15 @@ angular
 
                                                 for(var k = 0; k < $scope.data.regionalData[i].sectors.length; k++) {
                                                     RegionalData.sectors
-                                                        .link({id: $scope.data.regionalData[i].sectors[k]})
+                                                        .link({id: $scope.data.regionalData[i].id, fk: $scope.data.regionalData[i].sectors[k]}, null)
                                                         .$promise
                                                         .then(function (result) {
                                                             console.log(result);
                                                         },
                                                         function(err) {
-                                                            if (err) console.log("Error adding sector " + $scope.data.regionalData[i].sectors[k] + " to region " + $scope.data.regionalData[i].Name);
-                                                            else console.log("Sector " + $scope.data.regionalData[i].sectors[k] + " successfully added to region " + $scope.data.regionalData[i].Name);
+                                                            if (err) {
+                                                                console.log(err.data.error.message);
+                                                            }
                                                     });
                                                 }
                                             });
@@ -184,7 +250,10 @@ angular
                                 RegionalData.sectors($scope.data.regionalData[i])
                                     .$promise
                                     .then(function(sectors) {
-                                        $scope.data.regionalData[i].sectors = sectors || [{}];
+                                        $scope.data.regionalData[i].sectors = [];
+                                        for(var j = 0; j < sectors.length; j++) {
+                                            $scope.data.regionalData[i].sectors.push(sectors[j].id);
+                                        }
                                     });
                             })(i);
                         }
@@ -193,9 +262,39 @@ angular
                                 RegionalData.subSectors($scope.data.regionalData[i])
                                     .$promise
                                     .then(function(subSectors) {
-                                        $scope.data.regionalData[i].subSectors = subSectors || [{}];
+                                        $scope.data.regionalData[i].subSectors = [];
+                                        for(var j = 0; j < subSectors.length; j++) {
+                                            $scope.data.regionalData[i].subSectors.push(subSectors[j].id);
+                                        }
                                     });
                             })(i);
+                        }
+                        //console.log($scope.data.regionalData);
+                    });
+            };
+
+            $scope.getProjectContributions = function(item) {
+                Contribution
+                    .find({projectId: item.id})
+                    .$promise
+                    .then(function(results) {
+                        if(results.length === 0) {
+                            $scope.data.contributions = [{}];
+                        }
+                        else {
+                            $scope.data.contributions = [];
+                            for (var i = 0; i < results.length; i++) {
+                                (function (i) {
+                                    var contrib = {Amount: results[i].Amount};
+                                    Contribution
+                                        .funder(results[i])
+                                        .$promise
+                                        .then(function (funder) {
+                                            contrib.Funder = funder;
+                                            $scope.data.contributions.push(contrib);
+                                        });
+                                })(i);
+                            }
                         }
                         //console.log($scope.data.regionalData);
                     });
@@ -312,10 +411,11 @@ angular
                         }
                     });
                     $scope.data.regionalData = $scope.data.regionalData || $scope.getProjectRegionalData({id: $state.params.projectId});
+                    $scope.data.contributions = $scope.data.contributions || $scope.getProjectContributions({id: $state.params.projectId});
                     $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
                 }
                 else {
-                    console.log("NEW");
+                    console.log("New Project...");
                     $scope.data.project = $scope.data.project || {};
                     $scope.data.project.implementingPartners = $scope.data.project.implementingPartners || [];
                     $scope.data.regionalData = $scope.data.regionalData || [];
@@ -323,6 +423,7 @@ angular
                     $scope.data.projectSubSectors = $scope.data.projectSubSectors || [];
                     $scope.data.organization = $scope.data.organization || {};
                     $scope.data.projectContacts = $scope.data.projectContacts || [{}, {}];
+                    $scope.data.contributions = $scope.data.contributions || [{}];
                     //$scope.data.regionalData[0].contact = $scope.data.regionalData[0].contact || {};
                     //$scope.data.regionalData[0].locations = $scope.data.regionalData[0].locations || [];
                 }
