@@ -56,10 +56,19 @@
         </div>
 
         <div class="form-group">
-            <label for="OrgCountry">What is the country?</label>
-            <input type="text" class="form-control" name="OrgCountry"
+            <label for="OrgCountryOld">What is the country?</label>
+            <input type="text" class="form-control" name="OrgCountryOld"
                    placeholder="Organization Country" autocomplete="on"
                    ng-model="data.organization.location.Country">
+        </div>
+
+        <div class="form-group">
+            <label for="OrgCountry">What is the country?</label>
+            <select class="form-control" name="OrgCountry"
+                   ng-model="data.organization.location.Country" pvp-country-picker required></select>
+            <span class="has-error control-label" ng-show="projectForm.OrgCountry.$invalid && projectForm.OrgCountry.$dirty">
+                Organization Country field is required.
+            </span>
         </div>
 
         <div class="form-group">

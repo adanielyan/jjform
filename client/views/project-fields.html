@@ -99,10 +99,12 @@
 
         <div class="form-group">
             <label class="control-label" for="ProjectCountry">What is the country?</label>
-            <input type="text" class="form-control" name="ProjectCountry"
-                   placeholder="Project Primary Office Country" autocomplete="on"
-                   ng-model="data.project.location.Country">
+            <select class="form-control" name="ProjectCountry" autocomplete="on"
+                    ng-model="data.project.location.Country" pvp-country-picker></select>
         </div>
+        <span class="has-error control-label" ng-show="projectForm.ProjectCountry.$invalid">
+            Project Country field is required.
+        </span>
     </div>
 </div>
 

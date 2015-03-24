@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app')
+angular.module('bootstrap-multiselect', [])
     .directive('multiple', function () {
 
         return {

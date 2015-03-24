@@ -1,7 +1,9 @@
 angular
     .module('app', [
         'lbServices',
-        'ui.router'
+        'ui.router',
+        'bootstrap-multiselect',
+        'angular-country-picker'
     ])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $stateProvider

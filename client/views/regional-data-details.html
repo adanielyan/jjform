@@ -4,28 +4,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{regionalDatum.Region || "New Region"}}</div>
             <div class="panel-body">
+                <label class="control-label">Activity Location Information</label>
                 <p>Please list the following information for project offices and activity locations for this region.
                     Please provide as much information related to street address, village name, postal code, or GIS coordinates as possible.
                     Please list as many as possible for the region.</p>
 
-                <div class="form-inline">
-                    <div class="form-group form-inline">
-                        <select ng-model="regionalDatum.sectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.sectors"></select>
-                    </div>
-
-
-                    <div class="form-group" ng-repeat="subSector in regionalDatum.sectors">
-                        <select ng-model="regionalDatum.subSectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.subSectors"></select>
-                    </div>
-                </div>
-                <p>{{regionalDatum.sectors}}</p>
-
-
-
-                <p>{{data.projectSectors}}</p>
-
                 <div ng-repeat="(locationIndex, regionLocation) in regionalDatum.locations" class="list-group">
                     <div class="panel panel-default">
+                        <div class="panel-heading">{{regionLocation.Name || "New Location"}}</div>
                         <div class="panel-body">
 
                             <div class="form-group">
@@ -45,13 +31,10 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control" name="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}"
-                                       placeholder="Activity Location Country" autocomplete="off" required
-                                       ng-model="regionLocation.Country">
+                                <label class="control-label" for="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}">What is the Country of location?</label>
+                                <select class="form-control" name="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}"
+                                        ng-model="data.project.location.Country" pvp-country-picker disabled></select>
                             </div>
-                            <span class="has-error control-label" ng-show="RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}.$invalid && RegionLocationCountry_{{regionIndex+1}}_{{locationIndex+1}}.$dirty">
-                                Location Country is required.
-                            </span>
 
                             <div class="form-group">
                                 <input type="text" class="form-control" name="RegionLocationAddress_{{regionIndex+1}}_{{locationIndex+1}}"
@@ -64,9 +47,21 @@
                                        placeholder="Activity Location City" autocomplete="on" required
                                        ng-model="regionLocation.City">
                             </div>
-                            <span class="has-error control-label" ng-show="RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$invalid && RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$dirty">
+                            <span class="has-error control-label" ng-show="projectForm.RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$invalid && projectForm.RegionLocationCity_{{regionIndex+1}}_{{locationIndex+1}}.$dirty">
                                 Location City is required.
                             </span>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="RegionLocationSubRegion[regionLocation][locationIndex]"
+                                       placeholder="Activity Location Sub-region" autocomplete="on"
+                                       ng-model="regionLocation.SubRegion">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="RegionLocationPostalCode[regionLocation][locationIndex]"
+                                       placeholder="Activity Location Postal Code" autocomplete="on"
+                                       ng-model="regionLocation.Zip">
+                            </div>
 
                             <div class="form-group">
                                 <input type="text" class="form-control" name="OrgRegion"
@@ -80,6 +75,19 @@
                 </div>
                 <label class="control-label">To add a location please click on <em>Add Location</em> button below</label><br>
                 <button class="btn btn-default" type="button" ng-click="addRegionalDataLocation(regionIndex, $event)">Add Location</button>
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <select ng-model="regionalDatum.sectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.sectors"></select>
+                    </div>
+
+
+                    <div class="form-group" ng-repeat="subSector in regionalDatum.sectors">
+                        <select ng-model="regionalDatum.subSectors" multiple="multiple" ng-options="ss.id as ss.Name for ss in data.subSectors"></select>
+                    </div>
+                </div>
+                <p>{{regionalDatum.sectors}}</p>
+
             </div>
         </div>
     </div>
