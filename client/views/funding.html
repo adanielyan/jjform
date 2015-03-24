@@ -4,11 +4,11 @@
         <div class="form-group"
              ng-class="{'has-error': projectForm.ProjectTotalFunding.$invalid
                 && projectForm.ProjectTotalFunding.$dirty}">
+            <label class="control-label" for="ProjectTotalFunding">What is the total funding for the life of the project? <span class="required">*</span></label>
             <div class="row">
                 <div class="col-md-4">
-                    <label class="control-label" for="ProjectTotalFunding">What is the total funding for the life of the project? </label>
                     <input type="number" class="form-control" name="ProjectTotalFunding"
-                           placeholder="Project Total Funding in USD" autocomplete="off" required
+                           placeholder="Project Total Funding in USD (required)" autocomplete="off" required
                            ng-model="data.project.TotalFunding">
                     <span class="has-error control-label" ng-show="projectForm.ProjectTotalFunding.$invalid && projectForm.ProjectTotalFunding.$dirty">
                       Project Total Funding is required.
@@ -20,9 +20,9 @@
         <div class="form-group"
              ng-class="{'has-error': projectForm.RegionGovFunding.$invalid
                 && projectForm.RegionGovFunding.$dirty}">
+            <label class="control-label" for="RegionGovFunding">If applicable, please list any national, regional or other government funding for this project in USD.</label>
             <div class="row">
                 <div class="col-md-4">
-                    <label class="control-label" for="RegionGovFunding">If applicable, please list any national, regional or other government funding for this project in USD.</label>
                     <input type="number" class="form-control" name="RegionGovFunding"
                            placeholder="Regional or Other Government Funding in USD" autocomplete="off"
                            ng-model="data.project.GovFunding">
@@ -39,18 +39,23 @@
                 <div class="panel-body">
                     <div class="form-group" ng-repeat="contribution in data.contributions">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4" ng-class="{'has-error': projectForm.FundingFunder{{$index}}.$invalid}">
                                 <input type="text" class="form-control" name="FundingFunder{{$index}}"
-                                       placeholder="Funder Name"
+                                       placeholder="Funder Name (required)"
                                        ng-model="contribution.Funder.Name"
-                                       ng-disabled="contribution.Funder.id">
+                                       ng-disabled="contribution.Funder.id" required>
+                                <span class="has-error control-label" ng-show="projectForm.FundingFunder{{$index}}.$invalid">
+                                  Funder Name is required.
+                                </span>
                             </div>
                             <div class="col-md-4">
                                 <input type="number" class="form-control" name="FundingAmount{{$index}}"
                                        placeholder="Region Funding in USD"
                                        ng-model="contribution.Amount">
                             </div>
-                            <button class="btn btn-danger" type="button" ng-click="removeProjectContribution($index)">Remove Funder <span class="glyphicon glyphicon-trash"></span></button>
+                            <div class="col-md-4">
+                                <button class="btn btn-danger" type="button" ng-click="removeProjectContribution($index)">Remove Funder <span class="glyphicon glyphicon-trash"></span></button>
+                            </div>
                         </div>
                     </div>
                     <label class="control-label">To add a funder please click on <em>Add Funder</em> button below</label><br>

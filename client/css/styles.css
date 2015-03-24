@@ -9,3 +9,7 @@ body {
 .panel-heading {
     font-weight: bold;
 }
+
+label .required {
+    color: #d43f3a;
+}

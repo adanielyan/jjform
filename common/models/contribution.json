@@ -6,7 +6,7 @@
   "properties": {
     "Amount": {
       "type": "number",
-      "required": true,
+      "required": false,
       "index": false
     }
   },

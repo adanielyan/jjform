@@ -82,6 +82,17 @@ angular
                     .then(function(org) {
                         $scope.data.project.organizationId = org.id;
                         $scope.data.organization.location.organizationId = org.id;
+
+                        var saved = {
+                            project: false,
+                            regions: false,
+                            //orgLocation: true,
+                            contributions: false,
+                            locations: false,
+                            sectors: false,
+                            subSectors: true //TODO: change this to false when subSectors setter is created
+                        };
+
                         Location
                             .upsert($scope.data.organization.location)
                             .$promise
@@ -92,11 +103,28 @@ angular
                             .upsert($scope.data.project)
                             .$promise
                             .then(function (project) {
+
+                                var reloadForm = function(saved) {
+                                    //Reloading page if everything has finished saving
+                                    if (saved.project && saved.regions && saved.contributions && saved.locations && saved.sectors && saved.subSectors) {
+                                        $state.transitionTo('project.details', {projectId: project.id}, {
+                                            location: true,
+                                            notify: true,
+                                            reload: true
+                                        });
+                                    }
+                                };
+
                                 console.log("Project " + project.Name + " saved.");
                                 $scope.data.project = project;
+                                saved.project = true;
+                                reloadForm(saved);
 
                                 //Saving Funders and Contributions
-
+                                if($scope.data.contributions.length === 0) {
+                                    saved.contributions = true;
+                                    reloadForm(saved);
+                                }
                                 for (var i = 0; i < $scope.data.contributions.length; i++) {
                                     (function (i) {
                                         var contrib = {projectId: project.id, Amount: $scope.data.contributions[i].Amount};
@@ -115,6 +143,10 @@ angular
                                                             .$promise
                                                             .then(function (contribution) {
                                                                 console.log("Contribution " + contribution.id + " created.");
+                                                                if (i === $scope.data.contributions.length - 1) {
+                                                                    saved.contributions = true;
+                                                                    reloadForm(saved);
+                                                                }
                                                             });
                                                     }
                                                     else {
@@ -129,6 +161,10 @@ angular
                                                                     .$promise
                                                                     .then(function (contribution) {
                                                                         console.log("Contribution " + contribution.id + " created.");
+                                                                        if (i === $scope.data.contributions.length - 1) {
+                                                                            saved.contributions = true;
+                                                                            reloadForm(saved);
+                                                                        }
                                                                     });
 
                                                             });
@@ -146,6 +182,10 @@ angular
                                                         .$promise
                                                         .then(function (contribution) {
                                                             console.log("Contribution " + contribution.id + " created.");
+                                                            if (i === $scope.data.contributions.length - 1) {
+                                                                saved.contributions = true;
+                                                                reloadForm(saved);
+                                                            }
                                                         });
                                                 },
                                                 function(err) {
@@ -160,7 +200,11 @@ angular
                                                                     .create(contrib)
                                                                     .$promise
                                                                     .then(function (contribution) {
-                                                                        console.log("Contribution " + contribution.id + " created.");
+                                                                        console.log("Contribution " + contribution.id + " for new Funder was created.");
+                                                                        if (i === $scope.data.contributions.length - 1) {
+                                                                            saved.contributions = true;
+                                                                            reloadForm(saved);
+                                                                        }
                                                                     });
 
                                                             });
@@ -171,6 +215,10 @@ angular
                                 }
 
                                 //Saving Regions
+                                if($scope.data.regionalData.length === 0) {
+                                    saved.regions = saved.locations = saved.sectors = saved.subSectors = true;
+                                    reloadForm(saved);
+                                }
                                 for (var i = 0; i < $scope.data.regionalData.length; i++) {
                                     (function (i) {
                                         $scope.data.regionalData[i]['projectId'] = project.id;
@@ -184,14 +232,17 @@ angular
                                                     .$promise
                                                     .then(function (contact) {
                                                         console.log("Contact " + contact.Name + " created successfully.");
-                                                        if (i == $scope.data.regionalData.length - 1) {
-                                                            $state.transitionTo('project.details', {projectId: project.id}, {
-                                                                location: true,
-                                                                notify: true,
-                                                                reload: true
-                                                            });
+
+                                                        //Reloading page
+                                                        if (i === $scope.data.regionalData.length - 1) {
+                                                            saved.regions = true;
+                                                            reloadForm(saved);
                                                         }
                                                     });
+                                                if($scope.data.regionalData[i].locations.length === 0) {
+                                                    saved.locations = true;
+                                                    reloadForm(saved);
+                                                }
                                                 for (var j = 0; j < $scope.data.regionalData[i].locations.length; j++) {
                                                     (function (j) {
                                                         $scope.data.regionalData[i].locations[j]['Region'] = regionalData.Region;
@@ -201,22 +252,38 @@ angular
                                                             .$promise
                                                             .then(function (location) {
                                                                 console.log("Location " + location.Name + " created successfully.");
+
+                                                                //Reloading page if everything has finished saving
+                                                                if((i === $scope.data.regionalData.length - 1) && (j === $scope.data.regionalData[i].locations.length - 1)) {
+                                                                    saved.locations = true;
+                                                                    reloadForm(saved);
+                                                                }
                                                             });
                                                     })(j);
                                                 }
 
+                                                if($scope.data.regionalData[i].sectors.length === 0) {
+                                                    saved.sectors = true;
+                                                    reloadForm(saved);
+                                                }
                                                 for(var k = 0; k < $scope.data.regionalData[i].sectors.length; k++) {
-                                                    RegionalData.sectors
-                                                        .link({id: $scope.data.regionalData[i].id, fk: $scope.data.regionalData[i].sectors[k]}, null)
-                                                        .$promise
-                                                        .then(function (result) {
-                                                            console.log(result);
-                                                        },
-                                                        function(err) {
-                                                            if (err) {
-                                                                console.log(err.data.error.message);
-                                                            }
-                                                    });
+                                                    (function (k) {
+                                                        RegionalData.sectors
+                                                            .link({id: regionalData.id, fk: $scope.data.regionalData[i].sectors[k]}, null)
+                                                            .$promise
+                                                            .then(function (result) {
+                                                                console.log(result);
+                                                                if((i === $scope.data.regionalData.length - 1) && (k === $scope.data.regionalData[i].sectors.length - 1)) {
+                                                                    saved.sectors = true;
+                                                                    reloadForm(saved);
+                                                                }
+                                                            },
+                                                            function(err) {
+                                                                if (err) {
+                                                                    console.log(err.data.error.message);
+                                                                }
+                                                            });
+                                                    })(k);
                                                 }
                                             });
                                     })(i);
@@ -296,6 +363,7 @@ angular
                             $scope.data.contributions = [{}];
                         }
                         else {
+                            console.log("Retrieved Contributions");
                             $scope.data.contributions = [];
                             for (var i = 0; i < results.length; i++) {
                                 (function (i) {
@@ -338,10 +406,10 @@ angular
 
             $scope.addProjectRegionalData = function($event) {
                 if($scope.data.regionalData === undefined) {
-                    $scope.data.regionalData = [{}];
+                    $scope.data.regionalData = [{locations: []}];
                 }
                 else {
-                    $scope.data.regionalData.push({});
+                    $scope.data.regionalData.push({locations: []});
                 }
                 //$event.preventDefault();
             };
