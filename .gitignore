@@ -2,6 +2,8 @@
 node_modules
 .editorconfig
 .idea
-client/vendor
+!client/vendor
+client/vendor/*
+!client/vendor/bootstrap-multiselect
 sync.log
 .strong-pm
