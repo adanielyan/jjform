@@ -94,67 +94,81 @@ angular
                             .then(function (project) {
                                 console.log("Project " + project.Name + " saved.");
                                 $scope.data.project = project;
+
                                 //Saving Funders and Contributions
 
-                                Contribution
-                                    .find({projectId: project.id})
-                                    .$promise
-                                    .then(function(contributions) {
-                                        var iteration = 0;
-                                        for (var i = 0; i < contributions.length; i++) {
-                                            (function (i) {
-                                                Contribution
-                                                    .destroyById(contributions[i])
-                                                    .$promise
-                                                    .then(function() {
-                                                        iteration++;
-                                                        console.log("Contribution " + contributions[i].id + " has been deleted");
-                                                        if(iteration === contributions.length) {
-                                                            for (var i = 0; i < $scope.data.contributions.length; i++) {
-                                                                (function (i) {
-                                                                    Funder
-                                                                        .find({Name: $scope.data.contributions[i].Funder})
-                                                                        .$promise
-                                                                        .then(function(funder) {
-                                                                            console.log(funder);
-                                                                            if(funder.length === 0) {
-                                                                                Funder
-                                                                                    .create($scope.data.contributions[i].Funder)
-                                                                                    .$promise
-                                                                                    .then(function(newFunder) {
-                                                                                        console.log("Funder " + newFunder.id + " has been created.");
-                                                                                        Contribution
-                                                                                            .upsert({projectId: project.id, funderId: newFunder.id, Amount: $scope.data.contributions[i].Amount})
-                                                                                            .$promise
-                                                                                            .then(function (contribution) {
-                                                                                                console.log("Contribution " + contribution.id + " created.");
-                                                                                            });
-
-                                                                                    });
-                                                                            }
-                                                                            else {
-                                                                                Contribution
-                                                                                    .create({projectId: project.id, funderId: funder[0].id, Amount: $scope.data.contributions[i].Amount})
-                                                                                    .$promise
-                                                                                    .then(function (contribution) {
-                                                                                        console.log("Contribution " + contribution.id + " created.");
-                                                                                    });
-
-                                                                            }
-                                                                        });
-                                                                })(i);
-                                                            }
-                                                        }
-                                                    },
-                                                    function(err) {
-                                                        console.log("Error deleting contribution " + contributions[i].id + ": " + err.data.error.message);
-                                                    });
-                                            })(i);
+                                for (var i = 0; i < $scope.data.contributions.length; i++) {
+                                    (function (i) {
+                                        var contrib = {projectId: project.id, Amount: $scope.data.contributions[i].Amount};
+                                        if($scope.data.contributions[i].id !== undefined) {
+                                            contrib.id = $scope.data.contributions[i].id;
                                         }
-                                    });
+                                        if($scope.data.contributions[i].Funder.id !== undefined) {
+                                            Funder
+                                                .exists({id: $scope.data.contributions[i].Funder.id})
+                                                .$promise
+                                                .then(function(response) {
+                                                    if(response.exists) {
+                                                        contrib.funderId = $scope.data.contributions[i].Funder.id;
+                                                        Contribution
+                                                            .upsert(contrib)
+                                                            .$promise
+                                                            .then(function (contribution) {
+                                                                console.log("Contribution " + contribution.id + " created.");
+                                                            });
+                                                    }
+                                                    else {
+                                                        Funder
+                                                            .create($scope.data.contributions[i].Funder)
+                                                            .$promise
+                                                            .then(function(newFunder) {
+                                                                console.log("Funder " + newFunder.id + " has been created.");
+                                                                contrib.funderId = newFunder.id;
+                                                                Contribution
+                                                                    .create(contrib)
+                                                                    .$promise
+                                                                    .then(function (contribution) {
+                                                                        console.log("Contribution " + contribution.id + " created.");
+                                                                    });
 
+                                                            });
+                                                    }
+                                                });
+                                        }
+                                        else {
+                                            Funder
+                                                .findOne({filter: {where: {Name: $scope.data.contributions[i].Funder.Name}}})
+                                                .$promise
+                                                .then(function(response) {
+                                                    contrib.funderId = response.id;
+                                                    Contribution
+                                                        .create(contrib)
+                                                        .$promise
+                                                        .then(function (contribution) {
+                                                            console.log("Contribution " + contribution.id + " created.");
+                                                        });
+                                                },
+                                                function(err) {
+                                                    if(err.data.error.code === "MODEL_NOT_FOUND") {
+                                                        Funder
+                                                            .create($scope.data.contributions[i].Funder)
+                                                            .$promise
+                                                            .then(function (newFunder) {
+                                                                console.log("Funder " + newFunder.id + " has been created.");
+                                                                contrib.funderId = newFunder.id;
+                                                                Contribution
+                                                                    .create(contrib)
+                                                                    .$promise
+                                                                    .then(function (contribution) {
+                                                                        console.log("Contribution " + contribution.id + " created.");
+                                                                    });
 
-
+                                                            });
+                                                    }
+                                                });
+                                        }
+                                    })(i);
+                                }
 
                                 //Saving Regions
                                 for (var i = 0; i < $scope.data.regionalData.length; i++) {
@@ -186,7 +200,7 @@ angular
                                                             .upsert($scope.data.regionalData[i].locations[j])
                                                             .$promise
                                                             .then(function (location) {
-                                                                console.log("Location " + location.Name + "created successfully.");
+                                                                console.log("Location " + location.Name + " created successfully.");
                                                             });
                                                     })(j);
                                                 }
@@ -285,13 +299,12 @@ angular
                             $scope.data.contributions = [];
                             for (var i = 0; i < results.length; i++) {
                                 (function (i) {
-                                    var contrib = {Amount: results[i].Amount};
                                     Contribution
                                         .funder(results[i])
                                         .$promise
                                         .then(function (funder) {
-                                            contrib.Funder = funder;
-                                            $scope.data.contributions.push(contrib);
+                                            results[i].Funder = funder;
+                                            $scope.data.contributions.push(results[i]);
                                         });
                                 })(i);
                             }
@@ -334,24 +347,57 @@ angular
             };
 
             $scope.removeProjectRegionalData = function(index) {
-                RegionalData.contact
-                    .destroy({id: $scope.data.regionalData[index].id})
-                    .$promise
-                    .then(function() {
-                        console.log("Contact for region " + $scope.data.regionalData[index].Name + " is destroyed.");
-                        RegionalData.locations
-                            .destroyAll({id: $scope.data.regionalData[index].id})
-                            .$promise
-                            .then(function() {
-                                Project.regionalData
-                                    .destroyById({id: $scope.data.regionalData[index].projectId, fk: $scope.data.regionalData[index].id})
-                                    .$promise
-                                    .then(function() {
-                                        console.log("Region " + $scope.data.regionalData[index].Name + " is destroyed.");
-                                        $scope.data.regionalData.splice(index, 1);
-                                    });
-                            });
-                    });
+                if($scope.data.regionalData[index].id === undefined) {
+                    $scope.data.regionalData.splice(index, 1);
+                }
+                else {
+                    RegionalData.contact
+                        .destroy({id: $scope.data.regionalData[index].id})
+                        .$promise
+                        .then(function () {
+                            console.log("Contact for region " + $scope.data.regionalData[index].Name + " is destroyed.");
+                            RegionalData.locations
+                                .destroyAll({id: $scope.data.regionalData[index].id})
+                                .$promise
+                                .then(function () {
+                                    Project.regionalData
+                                        .destroyById({
+                                            id: $scope.data.regionalData[index].projectId,
+                                            fk: $scope.data.regionalData[index].id
+                                        })
+                                        .$promise
+                                        .then(function () {
+                                            console.log("Region " + $scope.data.regionalData[index].Name + " is destroyed.");
+                                            $scope.data.regionalData.splice(index, 1);
+                                        });
+                                });
+                        });
+                }
+            };
+
+            $scope.addProjectContribution = function($event) {
+                if($scope.data.contributions === undefined) {
+                    $scope.data.contributions = [{}];
+                }
+                else {
+                    $scope.data.contributions.push({});
+                }
+                //$event.preventDefault();
+            };
+
+            $scope.removeProjectContribution = function(index) {
+                if($scope.data.contributions[index].id === undefined) {
+                    $scope.data.contributions.splice(index, 1);
+                }
+                else {
+                    Contribution
+                        .destroyById({id: $scope.data.contributions[index].id})
+                        .$promise
+                        .then(function () {
+                            console.log("Contribution " + $scope.data.contributions[index].id + " is destroyed.");
+                            $scope.data.contributions.splice(index, 1);
+                        });
+                }
             };
 
             $scope.addProjectImplementingPartner = function($event) {
@@ -383,13 +429,21 @@ angular
             };
 
             $scope.removeRegionalDataLocation = function(regionIndex, locationIndex) {
-                RegionalData.locations
-                    .destroyById({id: $scope.data.regionalData[regionIndex].id, fk: $scope.data.regionalData[regionIndex].locations[locationIndex].id})
-                    .$promise
-                    .then(function() {
-                        console.log("Location " + $scope.data.regionalData[regionIndex].locations[locationIndex].Name + " for region " + $scope.data.regionalData[regionIndex].Name + " is destroyed.");
-                        $scope.data.regionalData[regionIndex].locations.splice(locationIndex, 1);
-                    });
+                if($scope.data.regionalData[regionIndex].id === undefined || $scope.data.regionalData[regionIndex].locations[locationIndex].id === undefined) {
+                    $scope.data.regionalData[regionIndex].locations.splice(locationIndex, 1);
+                }
+                else {
+                    RegionalData.locations
+                        .destroyById({
+                            id: $scope.data.regionalData[regionIndex].id,
+                            fk: $scope.data.regionalData[regionIndex].locations[locationIndex].id
+                        })
+                        .$promise
+                        .then(function () {
+                            console.log("Location " + $scope.data.regionalData[regionIndex].locations[locationIndex].Name + " for region " + $scope.data.regionalData[regionIndex].Region + " is destroyed.");
+                            $scope.data.regionalData[regionIndex].locations.splice(locationIndex, 1);
+                        });
+                }
             };
 
 

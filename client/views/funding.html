@@ -42,18 +42,19 @@
                             <div class="col-md-4">
                                 <input type="text" class="form-control" name="FundingFunder{{$index}}"
                                        placeholder="Funder Name"
-                                       ng-model="contribution.Funder.Name">
+                                       ng-model="contribution.Funder.Name"
+                                       ng-disabled="contribution.Funder.id">
                             </div>
                             <div class="col-md-4">
                                 <input type="number" class="form-control" name="FundingAmount{{$index}}"
                                        placeholder="Region Funding in USD"
                                        ng-model="contribution.Amount">
                             </div>
-                            <button class="btn btn-danger" type="button" ng-click="removeProjectFunder($index)">Remove Funder <span class="glyphicon glyphicon-trash"></span></button>
+                            <button class="btn btn-danger" type="button" ng-click="removeProjectContribution($index)">Remove Funder <span class="glyphicon glyphicon-trash"></span></button>
                         </div>
                     </div>
                     <label class="control-label">To add a funder please click on <em>Add Funder</em> button below</label><br>
-                    <button class="btn btn-default" type="button" ng-click="addProjectFunder($event)">Add Funder</button>
+                    <button class="btn btn-default" type="button" ng-click="addProjectContribution($event)">Add Funder</button>
                 </div>
             </div>
         </div>
